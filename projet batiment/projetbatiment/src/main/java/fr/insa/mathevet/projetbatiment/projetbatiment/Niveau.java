@@ -9,5 +9,6 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
  * @author emma0
  */
 public class Niveau {
-    lhdlfhvoejfbvw
+    
+    private 
 }
