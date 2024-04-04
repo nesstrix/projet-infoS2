@@ -15,55 +15,32 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class Revetement {
     
-  /*  public int[][] TabRev {
-    BufferedReader bufferedReader = new BufferedReader(new FileReader("revetement.txt")); }   */
     
-    public int[][] Revetements(bufferedReader, BufferedWriter, {
-    BufferedReader in = new BufferedReader(new FileReader("revetement.txt"));
-    String ligne ; 
-    
-    String[] lines = revetement.split("\\n");
-   
-    int Revetements[][] = new int[6][n];	
-		
-                for (int k = 0; k < 17 ; k++) {
-                      if (lines[k].contains(";")) {
-                            
-                      }
-                          
-                      }
-                }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    catch(FileNotFoundException err) {
-    System.out.println("Erreur :le fichier n'existe pas ! \n"+err);
-}
-    catch (IOException err) {
-    System.out.prinln
-}
+    private int idRevetement ;
+    private String designation ; 
+    private boolean pourMur;
+    private boolean pourSol;
+    private boolean pourPlafond;
+    private double prixUnitaire ;
 
-    private static class bufferedReader {
-
-        public bufferedReader() {
-        }
+    public Revetement(int idRevetement, String designation, boolean pourMur, boolean pourSol, boolean pourPlafond, double prixUnitaire) {
+        this.idRevetement = idRevetement;
+        this.designation = designation;
+        this.pourMur = pourMur;
+        this.pourSol = pourSol;
+        this.pourPlafond = pourPlafond;
+        this.prixUnitaire = prixUnitaire;
     }
-}
-
-
+    
+    
+    ArrayList<String> listIndex = new ArrayList<String>(); 
+    
+    public List index ()
+            buffered list lire la ligne correspondante et faire return index, 
+    
+    1 =new Revetement(index);
+    
