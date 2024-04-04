@@ -36,11 +36,33 @@ public class Revetement {
         this.prixUnitaire = prixUnitaire;
     }
     
-    
     ArrayList<String> listIndex = new ArrayList<String>(); 
     
+    try { 
+    BufferedReader br = new BufferedReader(new FileReader("revetement.txt")); 
+    String line "";
+    split = line.split";";
+     while ((line = br.readLine()) != null) {
+         String
+     }
+    
+    
+}
     public List index ()
             buffered list lire la ligne correspondante et faire return index, 
     
     1 =new Revetement(index);
     
+
+}
+        
+    
+
+    
+    
+    catch(FileNotFoundException err) {
+    System.out.println("Erreur :le fichier n'existe pas ! \n"+err);
+}
+    catch (IOException err) {
+    System.out.prinln
+}
