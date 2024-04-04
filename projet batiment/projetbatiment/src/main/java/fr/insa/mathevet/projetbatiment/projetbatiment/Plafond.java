@@ -1,0 +1,28 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package fr.insa.mathevet.projetbatiment.projetbatiment;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author user
+ */
+public class Plafond {
+    
+    private int idPlafond;
+    ArrayList<Coin> listCoin=new ArrayList<Coin>();
+    ArrayList<Revetement> listRevetement=new ArrayList<Revetement>();
+
+    public Plafond(int idPlafond) {
+        this.idPlafond = idPlafond;
+    }
+
+    @Override
+    public String toString() {
+        return "Plafond{" + "idPlafond=" + idPlafond + ", listCoin=" + listCoin + ", listRevetement=" + listRevetement + '}';
+    }
+    
+    
+}
