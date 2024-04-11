@@ -11,6 +11,6 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
 public class Projetbatiment {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+      
     }
 }
