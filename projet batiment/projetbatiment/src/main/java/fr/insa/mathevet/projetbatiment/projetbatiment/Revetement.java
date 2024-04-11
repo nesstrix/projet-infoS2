@@ -15,54 +15,42 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.Path ;
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
+
 
 public class Revetement {
     
     
-    private int idRevetement ;
-    private String designation ; 
-    private boolean pourMur;
-    private boolean pourSol;
-    private boolean pourPlafond;
-    private double prixUnitaire ;
+   
+  public static void main(String[] args) throws FileNotFoundException {
+          String[][] revetements = new String[18][6];
+          
+        try  {
+            BufferedReader br = new BufferedReader(new FileReader("revetementss.txt"));
+            String ligne;
+            int i = 0;
+            while ((ligne = br.readLine()) != null) {
+                String[] elmt = ligne.split("; ");
 
-    public Revetement(int idRevetement, String designation, boolean pourMur, boolean pourSol, boolean pourPlafond, double prixUnitaire) {
-        this.idRevetement = idRevetement;
-        this.designation = designation;
-        this.pourMur = pourMur;
-        this.pourSol = pourSol;
-        this.pourPlafond = pourPlafond;
-        this.prixUnitaire = prixUnitaire;
+                for (int j = 0; j < elmt.length; j++) {
+                    revetements[i][j] = elmt[j];
+                }
+                i++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Affichage du tableau pour vérification
+        for (int i = 0; i < revetements.length; i++) {
+            for (int j = 0; j < revetements[i].length; j++) {
+                System.out.print(revetements[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
-    
-    ArrayList<String> listIndex = new ArrayList<String>(); 
-    
-    try { 
-    BufferedReader br = new BufferedReader(new FileReader("revetement.txt")); 
-    String line "";
-    split = line.split";";
-     while ((line = br.readLine()) != null) {
-         String
-     }
-    
-    
-}
-    public List index ()
-            buffered list lire la ligne correspondante et faire return index, 
-    
-    1 =new Revetement(index);
-    
+ 
+	}
 
-}
-        
-    
-
-    
-    
-    catch(FileNotFoundException err) {
-    System.out.println("Erreur :le fichier n'existe pas ! \n"+err);
-}
-    catch (IOException err) {
-    System.out.prinln
-}
