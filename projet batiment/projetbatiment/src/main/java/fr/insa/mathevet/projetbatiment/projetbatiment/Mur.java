@@ -22,6 +22,47 @@ public class Mur {
         this.nbrePortes = nbrePortes;
         this.nbreFenetres = nbreFenetres;
     }
+
+    public int getIdMur() {
+        return idMur;
+    }
+
+    public void setIdMur(int idMur) {
+        this.idMur = idMur;
+    }
+
+    public Coin getDebut() {
+        return debut;
+    }
+
+    public void setDebut(Coin debut) {
+        this.debut = debut;
+    }
+
+    public Coin getFin() {
+        return fin;
+    }
+
+    public void setFin(Coin fin) {
+        this.fin = fin;
+    }
+
+    public int getNbrePortes() {
+        return nbrePortes;
+    }
+
+    public void setNbrePortes(int nbrePortes) {
+        this.nbrePortes = nbrePortes;
+    }
+
+    public int getNbreFenetres() {
+        return nbreFenetres;
+    }
+
+    public void setNbreFenetres(int nbreFenetres) {
+        this.nbreFenetres = nbreFenetres;
+    }
+
     
     public double surfacePortes (int nbrePortes) {
         System.out.println ("Combien il y a-t-il de portes ? ");
