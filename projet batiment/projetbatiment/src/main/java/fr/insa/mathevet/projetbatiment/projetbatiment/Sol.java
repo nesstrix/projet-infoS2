@@ -47,7 +47,7 @@ public class Sol {
     
        
 
-public double Surface ( Coin ca , Coin cb ) {
+public double Surfacesol ( Coin ca , Coin cb ) {
     double cax = ca.getX();
     double cay = ca.getY();
     double cbx = cb.getX();
@@ -64,6 +64,21 @@ public double Surface ( Coin ca , Coin cb ) {
     
     return surfacesol = ((maxcx-mincx)*(maxcy-mincy));
     }
-  
+   
    }
+
+    public Coin getCa() {
+        return ca;
+    }
+
+    public Coin getCb() {
+        return cb;
+    }
+
+
+
+  public double getsurface(){
+    return Surface ;
+}
+ }
 
