@@ -11,6 +11,8 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
 public class Projetbatiment {
 
     public static void main(String[] args) {
+
+      
       
     }
 }
