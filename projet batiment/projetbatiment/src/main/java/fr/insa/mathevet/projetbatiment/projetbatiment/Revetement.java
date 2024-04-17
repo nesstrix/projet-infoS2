@@ -31,14 +31,16 @@ public class Revetement {
             BufferedReader br = new BufferedReader(new FileReader("revetementss.txt"));
             String ligne;
             int i = 0;
-            while ((ligne = br.readLine()) != null) {
-                String[] elmt = ligne.split("; ");
+            while ((ligne = br.readLine()) != null) {  
+            
+                String[] elmt = ligne.split(";");
 
                 for (int j = 0; j < elmt.length; j++) {
                     revetements[i][j] = elmt[j];
                 }
                 i++;
             }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
