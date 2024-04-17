@@ -17,18 +17,18 @@ public class Revetements {
 
 
     public static void main(String[] args) {
-        String fichier = "revetement.txt"; // Mettez le chemin de votre fichier ici
+        String fichier = "revetement.txt"; 
 
-        // Vérifier si le fichier existe
+      
         if (!fichierExiste(fichier)) {
             System.err.println("Le fichier n'existe pas ou n'est pas accessible.");
             return;
         }
 
-        // Déclaration et initialisation du tableau à deux dimensions
+       
         String[][] revetements = new String[18][6];
 
-        // Lecture du fichier
+     
         try (BufferedReader br = new BufferedReader(new FileReader(fichier))) {
             String ligne;
             int index= 0;
@@ -40,13 +40,13 @@ public class Revetements {
                 index++;
             }
         } catch (IOException e) {
-            // Gestion de l'exception s'il y a une erreur de lecture du fichier
+            
             System.err.println("Erreur de lecture du fichier : " + e.getMessage());
             e.printStackTrace();
-            return; // Arrêter l'exécution du programme
+            return; 
         }
 
-        // Affichage du tableau pour vérification
+       
         for (int i = 0; i < revetements.length; i++) {
             for (int j = 0; j < revetements[i].length; j++) {
                 System.out.print(revetements[i][j] + " ");
@@ -55,7 +55,7 @@ public class Revetements {
         }
     }
 
-    // Méthode pour vérifier si un fichier existe et est accessible en lecture
+  
     private static boolean fichierExiste(String fichier) {
         try {
             FileReader fileReader = new FileReader(fichier);
