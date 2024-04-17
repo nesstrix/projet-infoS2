@@ -8,6 +8,8 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
  *
  * @author emma0
  */
+import fr.insa.mathevet.projetbatiment.projetbatiment.*;
+
 public class Projetbatiment {
 
     public static void main(String[] args) {
@@ -29,6 +31,17 @@ public class Projetbatiment {
           int Coinfin = ++compteurCoin;
           double FinX = Lire.d();
           double FinY = Lire.d();
+          Coin CoinFin = new Coin(Coinfin, FinX, FinY);
+          System.out.println("combien voulez-vous de portes ?");
+          int nbrePortes = Lire.i();
+          System.out.println("combien de fenêtres voulez-vous ?");
+          int nbreFenetres = Lire.i();
+          Mur Mur1 = new Mur(MurId, CoinDeb, CoinFin, 3.0);
+          double surfacefenêtre = Mur1.surfaceFenetres(nbreFenetres);
+          double surfaceporte = Mur1.surfacePortes(nbrePortes);
+          double surfacemur = Mur1.surface(surfaceporte, surfacefenêtre);
+          
+
           
           
           
