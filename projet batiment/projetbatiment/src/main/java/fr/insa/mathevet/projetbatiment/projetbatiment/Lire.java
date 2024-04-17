@@ -1,4 +1,4 @@
-package fr.insa.mathevet.tp1gr4;
+package fr.insa.mathevet.projetbatiment.projetbatiment;
 
 import java.io.*;
 
