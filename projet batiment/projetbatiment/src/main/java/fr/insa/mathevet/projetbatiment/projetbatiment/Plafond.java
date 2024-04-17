@@ -12,12 +12,18 @@ import java.util.ArrayList;
 public class Plafond {
     
     private int idPlafond;
+    private int sol;
     ArrayList<Coin> listCoin=new ArrayList<Coin>();
     ArrayList<Revetement> listRevetement=new ArrayList<Revetement>();
+    ArrayList<Sol> listSol=new ArrayList<Sol>();
 
     public Plafond(int idPlafond) {
         this.idPlafond = idPlafond;
     }
+    
+    public int getSol();
+    Sol surface = new Sol();
+    
 
     @Override
     public String toString() {

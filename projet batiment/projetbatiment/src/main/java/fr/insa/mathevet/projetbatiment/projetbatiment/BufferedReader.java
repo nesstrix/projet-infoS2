@@ -3,15 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package fr.insa.mathevet.projetbatiment.projetbatiment;
-import java.util.ArrayList;
 
 /**
  *
  * @author emma0
  */
-public class Niveau {
+class BufferedReader {
     
-    private int idNiveau;
-    private double HauteurSousPlafond;
-    private List<Appartement> listAppartement;
 }

@@ -14,13 +14,65 @@ public class Mur {
     private Coin fin;
     private int nbrePortes; 
     private int nbreFenetres;
+    private double hauteur;
+    private Revetement revetements ;
 
-    public Mur(int idMur, Coin debut, Coin fin) {
+    public Mur(int idMur, Coin debut, Coin fin,double hauteur) {
         this.idMur = idMur;
         this.debut = debut;
         this.fin = fin;
         this.nbrePortes = nbrePortes;
         this.nbreFenetres = nbreFenetres;
+        this.hauteur = hauteur;
+    }
+
+    public int getIdMur() {
+        return idMur;
+    }
+
+    public void setIdMur(int idMur) {
+        this.idMur = idMur;
+    }
+
+    public Coin getDebut() {
+        return debut;
+    }
+
+    public void setDebut(Coin debut) {
+        this.debut = debut;
+    }
+
+    public Coin getFin() {
+        return fin;
+    }
+
+    public void setFin(Coin fin) {
+        this.fin = fin;
+    }
+
+    public int getNbrePortes() {
+        return nbrePortes;
+    }
+
+    public void setNbrePortes(int nbrePortes) {
+        this.nbrePortes = nbrePortes;
+    }
+
+    public int getNbreFenetres() {
+        return nbreFenetres;
+    }
+
+    public void setNbreFenetres(int nbreFenetres) {
+        this.nbreFenetres = nbreFenetres;
+    }
+
+    
+    public double getHauteur() {
+        return hauteur;
+    }
+
+    public Revetement getRevetements() {
+        return revetements;
     }
     
     public double surfacePortes (int nbrePortes) {
