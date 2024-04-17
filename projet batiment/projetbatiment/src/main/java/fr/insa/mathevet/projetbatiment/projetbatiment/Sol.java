@@ -10,11 +10,16 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
  */
 import java.util.ArrayList ;
 
+
 public class Sol {
     
     private int idsol ;
     ArrayList<Coin> listCoin = new ArrayList<Coin>();
-
+    private Coin ca ;
+    private Coin cb ;
+ 
+    
+    
     public Sol(int idsol) {
         this.idsol = idsol;
     }
@@ -42,11 +47,38 @@ public class Sol {
     
        
 
-public int Surface ( a Coin, b Coin ) {
-    if 
-  int surfacesol = (this.a.x)-(Coin.y))
+public double Surfacesol ( Coin ca , Coin cb ) {
+    double cax = ca.getX();
+    double cay = ca.getY();
+    double cbx = cb.getX();
+    double cby = cb.getY();
+    double surfacesol ;
+    
+    
+    if ((cay!= cby)&&(cbx!= cax)) {
+        
+    double maxcx = Math.max(cax, cbx) ;
+    double maxcy = Math.max(cay, cby) ; 
+    double mincy = Math.min(cay, cby) ;
+    double mincx = Math.min(cax, cbx) ;     
+    
+    return surfacesol = ((maxcx-mincx)*(maxcy-mincy));
+    }
+   
+   }
+
+    public Coin getCa() {
+        return ca;
+    }
+
+    public Coin getCb() {
+        return cb;
+    }
 
 
 
+  public double getsurface(){
+    return Surface ;
 }
-}
+ }
+
