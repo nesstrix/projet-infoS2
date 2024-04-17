@@ -16,7 +16,7 @@ public class Mur {
     private int nbreFenetres;
     private double hauteur;
 
-    public Mur(int idMur, Coin debut, Coin fin,double hauteur) {
+    public Mur(int idMur, Coin debut, Coin fin, double hauteur) {
         this.idMur = idMur;
         this.debut = debut;
         this.fin = fin;
