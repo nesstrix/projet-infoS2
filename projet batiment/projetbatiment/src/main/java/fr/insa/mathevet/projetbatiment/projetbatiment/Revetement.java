@@ -43,7 +43,7 @@ public class Revetement {
             e.printStackTrace();
         }
 
-        // Affichage du tableau pour vérification
+        
         for (int i = 0; i < revetements.length; i++) {
             for (int j = 0; j < revetements[i].length; j++) {
                 System.out.print(revetements[i][j] + " ");
