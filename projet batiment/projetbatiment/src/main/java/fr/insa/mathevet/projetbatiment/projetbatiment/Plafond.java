@@ -24,5 +24,12 @@ public class Plafond {
         return "Plafond{" + "idPlafond=" + idPlafond + ", listCoin=" + listCoin + ", listRevetement=" + listRevetement + '}';
     }
     
+   public double Surface (Sol sol ) {
+       double spalfond ;
+       splafond = sol.getsurfacesol();
+       
+       
+   }
     
+       
 }
