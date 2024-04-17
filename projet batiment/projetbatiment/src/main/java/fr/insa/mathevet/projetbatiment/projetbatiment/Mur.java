@@ -15,6 +15,7 @@ public class Mur {
     private int nbrePortes; 
     private int nbreFenetres;
     private double hauteur;
+    private Revetement revetements ;
 
     public Mur(int idMur, Coin debut, Coin fin, double hauteur) {
         this.idMur = idMur;
@@ -65,6 +66,14 @@ public class Mur {
         this.nbreFenetres = nbreFenetres;
     }
 
+    
+    public double getHauteur() {
+        return hauteur;
+    }
+
+    public Revetement getRevetements() {
+        return revetements;
+    }
     
     public double surfacePortes (int nbrePortes) {
         System.out.println ("Combien il y a-t-il de portes ? ");
