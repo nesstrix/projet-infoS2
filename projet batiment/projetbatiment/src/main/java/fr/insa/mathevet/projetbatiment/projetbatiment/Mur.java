@@ -90,7 +90,7 @@ public class Mur {
     }
     
     public double surface(double surfacePortes, double surfaceFenetres) {
-        double surface = ((this.debut.x - this.fin.x)*2.5)-surfacePortes-surfaceFenetres;      
+        double surface = Math.abs(((this.debut.x - this.fin.x)*2.5)-surfacePortes-surfaceFenetres);      
         return surface;
     }
     
