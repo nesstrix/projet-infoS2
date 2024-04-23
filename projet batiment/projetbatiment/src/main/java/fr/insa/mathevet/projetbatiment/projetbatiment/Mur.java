@@ -4,6 +4,9 @@
  */
 package fr.insa.mathevet.projetbatiment.projetbatiment;
 
+import java.lang.Math;
+
+
 /**
  *
  * @author emma0
@@ -16,6 +19,7 @@ public class Mur {
     private int nbreFenetres;
     private double hauteur;
     private Revetement revetements ;
+    //static int NextId = 1 ;
 
     public Mur(int idMur, Coin debut, Coin fin, double hauteur) {
         this.idMur = idMur;
