@@ -13,6 +13,7 @@ public class Coin {
  private int  id;
     double  x;
     private double y;
+    //static int Nextid = 1;
 
     public Coin(int id, double x, double y) {
         this.id = id;
