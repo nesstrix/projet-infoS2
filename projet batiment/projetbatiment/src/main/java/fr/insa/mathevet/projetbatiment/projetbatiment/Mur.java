@@ -78,14 +78,14 @@ public class Mur {
     public double surfacePortes (int nbrePortes) {
         //System.out.println ("Combien il y a-t-il de portes ? ");
         //nbrePortes=Lire.i(); 
-        double surfacePortes = (this.nbrePortes)*0.90*2.10;
+        double surfacePortes = (nbrePortes)*0.90*2.10;
         return surfacePortes;
     }
 
     public double surfaceFenetres (int nbreFenetres){
         //System.out.println ("Combien il y a-t-il de fenetres ?");
         //nbreFenetres=Lire.i();
-        double surfaceFenetres = (this.nbreFenetres)*0.90*2.10;
+        double surfaceFenetres = (nbreFenetres)*0.90*2.10;
         return surfaceFenetres;
     }
     
