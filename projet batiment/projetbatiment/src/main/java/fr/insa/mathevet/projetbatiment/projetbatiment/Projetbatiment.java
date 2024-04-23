@@ -18,7 +18,10 @@ public class Projetbatiment {
       System.out.println ("combien de pièces voulez-vous ?");
       int nbPieces = Lire.i();
       int compteurPiece = 0;
+      int compteurSol = 0;
+      int compteurPlafond = 0;
       for (int j=0; j < nbPieces; j++){
+          int PieceId = ++compteurPiece; 
           System.out.println("combien de murs voulez vous ?");
           int nbMurs = Lire.i();
           int compteurMur = 0;
@@ -47,7 +50,9 @@ public class Projetbatiment {
               double surfacemur = Mur1.surface(surfaceporte, surfacefenêtre);
               System.out.println("la surface du mur est : " + surfacemur);
           }
-          Piece Piece1 = new Piece(PieceId, sol, plafond, )
+          int sol = ++compteurSol ;
+          int plafond = ++compteurPlafond ;
+          Piece Piece1 = new Piece(PieceId, Mur1 , Mur2, sol, plafond, 3.0);
               double surfacepiece = Piece1.surfacesol ()
               System.out.println ("la surface au sol de la piece est :" + surfacepiece);
           
