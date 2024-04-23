@@ -38,9 +38,11 @@ public class Projetbatiment {
           int nbreFenetres = Lire.i();
           Mur Mur1 = new Mur(MurId, CoinDeb, CoinFin, 3.0);
           double surfacefenêtre = Mur1.surfaceFenetres(nbreFenetres);
+          System.out.println("la surface fenêtre est : " + surfacefenêtre);
           double surfaceporte = Mur1.surfacePortes(nbrePortes);
+          System.out.println("la surface porte est : " + surfaceporte);
           double surfacemur = Mur1.surface(surfaceporte, surfacefenêtre);
-          
+          System.out.println("la surface du mur est : " + surfacemur);
 
           
           
