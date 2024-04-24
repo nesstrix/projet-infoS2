@@ -9,6 +9,10 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
  * @author emma0
  */
 import fr.insa.mathevet.projetbatiment.projetbatiment.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.LinkedList;
 
 public class Projetbatiment {
 
@@ -38,6 +42,9 @@ public class Projetbatiment {
               double FinX = Lire.d();
               double FinY = Lire.d();
               Coin CoinFin = new Coin(Coinfin, FinX, FinY);
+              List<Coin> listCoin = new ArrayList <>();
+              listCoin.add(CoinDeb);
+              listCoin.add(CoinFin);
               System.out.println("combien voulez-vous de portes ?");
               int nbrePortes = Lire.i();
               System.out.println("combien de fenêtres voulez-vous ?");
@@ -49,12 +56,17 @@ public class Projetbatiment {
               System.out.println("la surface porte est : " + surfaceporte);
               double surfacemur = Mur1.surface(surfaceporte, surfacefenêtre);
               System.out.println("la surface du mur est : " + surfacemur);
+              List<Mur> listMurs = new ArrayList <>();
+              listMurs.add(Mur1);
           }
           int sol = ++compteurSol ;
           int plafond = ++compteurPlafond ;
-          Piece Piece1 = new Piece(PieceId, Mur1 , Mur2, sol, plafond, 3.0);
-              double surfacepiece = Piece1.surfacesol ()
-              System.out.println ("la surface au sol de la piece est :" + surfacepiece);
+          Sol Sol1 = new Sol (sol);
+          double surfacesol = Sol1.surfacesol();
+          System.out.println("la surface du sol est :" + surfacesol);
+          Piece Piece1 = new Piece(PieceId, sol, plafond, 3.0, listMurs);
+          double surfacepiece = Piece1.surfacesol ()
+          System.out.println ("la surface au sol de la piece est :" + surfacepiece);
           
       }
 
