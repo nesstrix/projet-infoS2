@@ -9,12 +9,15 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
  * @author minasseessam
  */
 import java.util.ArrayList ;
+import java.util.Arrays;
+import java.util.List;
+import java.util.LinkedList;
 
 
 public class Sol {
     
     private int idsol ;
-    ArrayList<Coin> listCoin = new ArrayList<Coin>();
+    //ArrayList<Coin> listCoin = new ArrayList<Coin>();
     private Coin ca ;
     private Coin cb ;
  
@@ -27,6 +30,22 @@ public class Sol {
     @Override
     public String toString() {
         return "Sol{" + "idsol=" + idsol + ", listCoin=" + listCoin + '}';
+    }
+    
+    public Coin getCa() {
+        return ca;
+    }
+
+    public Coin getCb() {
+        return cb;
+    }
+
+    public void setCa(Coin ca) {
+        this.ca = ca;
+    }
+
+    public void setCb(Coin cb) {
+        this.cb = cb;
     }
 
     public int getIdsol() {
@@ -45,7 +64,9 @@ public class Sol {
         this.listCoin = listCoin;
     }
     
-       
+//ArrayList<Coin> listCoin = new ArrayList<Coin>();
+//listCoin.add(ca);
+//listCoin.add(cb);
 
 public double Surfacesol ( Coin ca , Coin cb ){
     double cax = ca.getX();
@@ -67,18 +88,12 @@ public double Surfacesol ( Coin ca , Coin cb ){
    
   }
 
-    public Coin getCa() {
-        return ca;
-    }
 
-    public Coin getCb() {
-        return cb;
-    }
 
 
 
     //public double getsurface(){
     //return Surface ;
-//}
+  //}
 }
 
