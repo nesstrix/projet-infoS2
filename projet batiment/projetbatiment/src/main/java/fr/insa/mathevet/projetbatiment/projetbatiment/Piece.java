@@ -16,8 +16,8 @@ public class Piece {
     private int idPiece;
     private Sol sol;
     private Plafond plafond;
-    //private Coin Coindeb;
-    //private Coin Coinfin;
+    private Coin Coindeb;
+    private Coin Coinfin;
     //private Coin cc;
     //private Coin cd;
     //private Sol surfacesol;
@@ -29,43 +29,29 @@ public class Piece {
     private Mur mur2;
     //private Mur mur3;
     //private Mur mur4;
-    //private List<Mur> listMurs;
+    private List<Mur> listMurs;
     
      //Coin ca, Coin cb, Coin cc,
 
-    public Piece(int idPiece, Sol sol, Plafond plafond, double hauteur, Mur mur1, Mur mur2) {
+    public Piece(int idPiece, Sol sol, Mur mur1 , Mur mur2, Plafond plafond, double hauteur) {
         this.idPiece = idPiece;
         this.sol = sol;
         this.plafond = plafond;
-        //this.Coindeb = Coindeb;
-        //this.Coinfin = Coinfin;
-        this.hauteur = hauteur;
-        this.mur1 = mur1;
-        this.mur2 = mur2;
-        //this.listMurs = listMurs;
-    }
-    
-    
-
-    //public Piece(int idPiece, Sol sol, Mur mur1 , Mur mur2, Plafond plafond, double hauteur) {
-        //this.idPiece = idPiece;
-        //this.sol = sol;
-        //this.plafond = plafond;
         //this.ca = ca;
         //this.cb = cb;
         //this.cc = cc;
         //this.cd = cd;
         //this.surfacesol = surfacesol;
-        //this.hauteur = hauteur;
-        //this.mur1 = new Mur(1, Coindeb, Coinfin,3);
-        //this.mur2 = new Mur (2, Coindeb, Coinfin, 3);
+        this.hauteur = hauteur;
+        this.mur1 = new Mur(1, Coindeb, Coinfin,3);
+        this.mur2 = new Mur (2, Coindeb, Coinfin, 3);
         //this.mur3 = new Mur (3, cb, cd, 3);
         //this.mur4 = new Mur (4, cd, ca, 3);
         //this.listMurs = new Arraylist <mur1, mur2, mur3, mur4>;
         //this.listMurs = new ArrayList<>(Arrays.asList(mur1, mur2, mur3, mur4));
-        //List<Mur> listMurs=new ArrayList<>();
-        //listMurs.add(mur1);
-        //listMurs.add(mur2);
+        List<Mur> listMurs=new ArrayList<>();
+        listMurs.add(mur1);
+        listMurs.add(mur2);
         //listMurs.add(mur3);
         //listMurs.add(mur4);
     }
