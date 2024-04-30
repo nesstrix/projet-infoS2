@@ -17,36 +17,21 @@ import java.util.LinkedList;
 public class Sol {
     
     private int idsol ;
-    //ArrayList<Coin> listCoin = new ArrayList<Coin>();
-    private Coin ca ;
-    private Coin cb ;
- 
-    
-    
+    ArrayList<Coin> listCoin = new ArrayList<Coin>();
+    private Mur mur1 ;
+    private Mur mur2 ;
+
     public Sol(int idsol) {
         this.idsol = idsol;
+        //this.longueur1 = longueur1;
+        //this.longueur2 = longueur2;
     }
 
     @Override
     public String toString() {
-        return "Sol{" + "idsol=" + idsol + ", listCoin=" + listCoin + '}';
+        return "Sol{" + "idsol=" + idsol + '}';
     }
     
-    public Coin getCa() {
-        return ca;
-    }
-
-    public Coin getCb() {
-        return cb;
-    }
-
-    public void setCa(Coin ca) {
-        this.ca = ca;
-    }
-
-    public void setCb(Coin cb) {
-        this.cb = cb;
-    }
 
     public int getIdsol() {
         return idsol;
@@ -55,6 +40,46 @@ public class Sol {
     public void setIdsol(int idsol) {
         this.idsol = idsol;
     }
+    
+    //private int idsol ;
+    //ArrayList<Coin> listCoin = new ArrayList<Coin>();
+    //private Coin ca ;
+    //private Coin cb ;
+ 
+    
+    
+    //public Sol(int idsol) {
+        //this.idsol = idsol;
+    //}
+
+    //@Override
+    //public String toString() {
+        //return "Sol{" + "idsol=" + idsol + ", listCoin=" + listCoin + '}';
+    //}
+    
+    //public Coin getCa() {
+        //return ca;
+    //}
+
+    //public Coin getCb() {
+        //return cb;
+    //}
+
+    //public void setCa(Coin ca) {
+        //this.ca = ca;
+    //}
+
+    //public void setCb(Coin cb) {
+        //this.cb = cb;
+    //}
+
+    //public int getIdsol() {
+        //return idsol;
+    //}
+
+    //public void setIdsol(int idsol) {
+        //this.idsol = idsol;
+    //}
 
     public ArrayList<Coin> getListCoin() {
         return listCoin;
@@ -68,25 +93,25 @@ public class Sol {
 //listCoin.add(ca);
 //listCoin.add(cb);
 
-public double Surfacesol ( Coin ca , Coin cb ){
-    double cax = ca.getX();
-    double cay = ca.getY();
-    double cbx = cb.getX();
-    double cby = cb.getY();
-    double surfacesol ;
+//public double Surfacesol ( Coin ca , Coin cb ){
+    //double cax = ca.getX();
+    //double cay = ca.getY();
+    //double cbx = cb.getX();
+    //double cby = cb.getY();
+    //double surfacesol ;
     
     
-    if ((cay!= cby)&&(cbx!= cax)) {
+    //if ((cay!= cby)&&(cbx!= cax)) {
         
-    double maxcx = Math.max(cax, cbx) ;
-    double maxcy = Math.max(cay, cby) ; 
-    double mincy = Math.min(cay, cby) ;
-    double mincx = Math.min(cax, cbx) ;     
+    //double maxcx = Math.max(cax, cbx) ;
+    //double maxcy = Math.max(cay, cby) ; 
+    //double mincy = Math.min(cay, cby) ;
+    //double mincx = Math.min(cax, cbx) ;     
     
-    return surfacesol = ((maxcx-mincx)*(maxcy-mincy));
-    }
+    //return surfacesol = ((maxcx-mincx)*(maxcy-mincy));
+    //}
    
-  }
+  //}
 
 
 
