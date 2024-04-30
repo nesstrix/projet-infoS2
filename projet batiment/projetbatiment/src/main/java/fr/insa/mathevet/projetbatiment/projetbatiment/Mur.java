@@ -15,10 +15,10 @@ public class Mur {
     private int nbrePortes; 
     private int nbreFenetres;
     private double hauteur;
-    private Revetement revetements ;
+    private uniRevetement revetement ;
 
     public Mur(int idMur, Coin debut, Coin fin,double hauteur) {
-        this.idMur = idMur;
+        this.idMur = idMur++;
         this.debut = debut;
         this.fin = fin;
         this.nbrePortes = nbrePortes;
@@ -66,23 +66,32 @@ public class Mur {
         this.nbreFenetres = nbreFenetres;
     }
 
-    
     public double getHauteur() {
         return hauteur;
     }
 
-    public Revetement getRevetements() {
-        return revetements;
+    public void setHauteur(double hauteur) {
+        this.hauteur = hauteur;
     }
+
+    public uniRevetement getRevetement() {
+        return revetement;
+    }
+
+    public void setRevetement(uniRevetement revetement) {
+        this.revetement = revetement;
+    }
+
     
-    public double surfacePortes (int nbrePortes) {
+    
+    public double surfacePortes () {
         System.out.println ("Combien il y a-t-il de portes ? ");
         nbrePortes=Lire.i(); 
         double surfacePortes = (this.nbrePortes)*0.90*2.10;
         return surfacePortes;
     }
 
-    public double surfaceFenetres (int nbreFenetres){
+    public double surfaceFenetres (){
         System.out.println ("Combien il y a-t-il de fenetres ?");
         nbreFenetres=Lire.i();
         double surfaceFenetres = (this.nbreFenetres)*0.90*2.10;
@@ -94,10 +103,45 @@ public class Mur {
         return surface;
     }
 
+    
     @Override
     public String toString() {
         return "Mur{" + "idMur=" + idMur + ", debut=" + debut + ", fin=" + fin + ", nbrePortes=" + nbrePortes + ", nbreFenetres=" + nbreFenetres + '}';
     }
 
 
+    
+public void rev(uniRevetement revetement){
+    this.revetement=revetement ;
 }
+
+public void optionRev(uniRevetement[] revetements){
+    System.out.println("Voici vos options de revêtements pour vos murs : ");
+    for(uniRevetement rev : revetements){
+        if (rev.isPourMur()){
+            System.out.println("id : " +rev.getId()+ " : "+ rev.getNom() +" au prix de : "+ rev.getPrixm2());
+        }
+    }
+}
+
+public uniRevetement choisirRevetement(uniRevetement[] revetements, int choixId) {
+        for (uniRevetement rev : revetements) {
+            if (rev.getId() == choixId && rev.isPourMur()) {
+                return rev;
+            }
+        }
+        return null; // Retourne null si aucun revêtement correspondant n'est trouvé
+    }
+ 
+public double prixmur(double surface){
+    System.out.println(surface* revetement.getPrixm2());
+    return surface* revetement.getPrixm2();
+    
+}
+    
+}
+      
+          
+         
+    
+
