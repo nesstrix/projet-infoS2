@@ -79,6 +79,11 @@ public class Mur {
         return revetements;
     }
     
+    public double Longueur (Coin debut, Coin fin){
+       double longueur = Math.sqrt(Math.pow(this.debut.getX() - this.fin.getX(),2) + Math.pow(this.debut.getY() - this.fin.getY(),2));
+       return longueur;
+    }
+    
     public double surfacePortes (int nbrePortes) {
         //System.out.println ("Combien il y a-t-il de portes ? ");
         //nbrePortes=Lire.i(); 
@@ -93,8 +98,8 @@ public class Mur {
         return surfaceFenetres;
     }
     
-    public double surface(double surfacePortes, double surfaceFenetres) {
-        double surface = Math.abs(((this.debut.x - this.fin.x)*2.5)-surfacePortes-surfaceFenetres);      
+    public double surface(double surfacePortes, double surfaceFenetres, double longueur) {
+        double surface = Math.abs((longueur*2.5)-surfacePortes-surfaceFenetres);      
         return surface;
     }
     
