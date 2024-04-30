@@ -19,8 +19,8 @@ public class Projetbatiment {
         
         uniRevetement[] revetements = Revetement.remplirRevetements();
 
-        System.out.println("Voulez-vous construire une maison ou un appartement?");
-        System.out.println("Si vous voulez une maison, répondez 1, si vous voulez un appartement, répondez 2");
+        System.out.println("Voulez-vous construire une maison ou un immeuble");
+        System.out.println("Si vous voulez une maison, répondez 1, si vous voulez un immeuble, répondez 2");
         int typeConstruction = Lire.i();
         int nbNiveaux = 0;
         int compteurPiece = 0;
