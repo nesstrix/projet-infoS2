@@ -112,7 +112,11 @@ public class Projetbatiment {
           System.out.println ("la surface au sol de la piece " + idPiece + " est :" + surfacesol);
           
           List<Piece> listPieces = new ArrayList <>();
-          System.out.println(listMurs);
+          listPieces.add(Piece1);
+          System.out.println(listCoin);
+          //System.out.println(listMurs);
+          System.out.println(listPieces);
+          
       }
     }
 }
