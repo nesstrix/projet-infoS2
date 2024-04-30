@@ -4,10 +4,15 @@
  */
 package fr.insa.mathevet.projetbatiment.projetbatiment;
 
+
+
+
 /**
  *
  * @author emma0
  */
+import java.lang.Math;
+
 public class Mur {
     private int idMur;
     private Coin debut;
@@ -17,8 +22,10 @@ public class Mur {
     private double hauteur;
     private uniRevetement revetement ;
 
-    public Mur(int idMur, Coin debut, Coin fin,double hauteur) {
-        this.idMur = idMur++;
+    //static int NextId = 1 ;
+
+    public Mur(int idMur, Coin debut, Coin fin, double hauteur) {
+        this.idMur = idMur;
         this.debut = debut;
         this.fin = fin;
         this.nbrePortes = nbrePortes;
@@ -65,52 +72,43 @@ public class Mur {
     public void setNbreFenetres(int nbreFenetres) {
         this.nbreFenetres = nbreFenetres;
     }
-
-    public double getHauteur() {
-        return hauteur;
-    }
-
-    public void setHauteur(double hauteur) {
-        this.hauteur = hauteur;
-    }
-
-    public uniRevetement getRevetement() {
+     public uniRevetement getRevetement() {
         return revetement;
     }
 
     public void setRevetement(uniRevetement revetement) {
         this.revetement = revetement;
     }
-
+  
+    public double getHauteur() {
+        return hauteur;
+    }
+   
+    public double Longueur (Coin debut, Coin fin){
+       double longueur = Math.sqrt(Math.pow(this.debut.getX() - this.fin.getX(),2) + Math.pow(this.debut.getY() - this.fin.getY(),2));
+       return longueur;
+    }
     
-    
-    public double surfacePortes () {
-        System.out.println ("Combien il y a-t-il de portes ? ");
-        nbrePortes=Lire.i(); 
-        double surfacePortes = (this.nbrePortes)*0.90*2.10;
+    public double surfacePortes (int nbrePortes) {
+        //System.out.println ("Combien il y a-t-il de portes ? ");
+        //nbrePortes=Lire.i(); 
+        double surfacePortes = (nbrePortes)*0.90*2.10;
         return surfacePortes;
     }
 
-    public double surfaceFenetres (){
-        System.out.println ("Combien il y a-t-il de fenetres ?");
-        nbreFenetres=Lire.i();
-        double surfaceFenetres = (this.nbreFenetres)*0.90*2.10;
+    public double surfaceFenetres (int nbreFenetres){
+        //System.out.println ("Combien il y a-t-il de fenetres ?");
+        //nbreFenetres=Lire.i();
+        double surfaceFenetres = (nbreFenetres)*0.90*2.10;
         return surfaceFenetres;
     }
     
-    public double surface(Coin debut, Coin fin, double surfacePortes, double surfaceFenetres) {
-        double surface = ((this.debut.x - this.fin.x)*2.5)-surfacePortes-surfaceFenetres;      
+    public double surface(double surfacePortes, double surfaceFenetres, double longueur) {
+        double surface = Math.abs((longueur*2.5)-surfacePortes-surfaceFenetres);      
         return surface;
     }
-
     
-    @Override
-    public String toString() {
-        return "Mur{" + "idMur=" + idMur + ", debut=" + debut + ", fin=" + fin + ", nbrePortes=" + nbrePortes + ", nbreFenetres=" + nbreFenetres + '}';
-    }
-
-
-    
+   
 public void rev(uniRevetement revetement){
     this.revetement=revetement ;
 }
@@ -138,10 +136,11 @@ public double prixmur(double surface){
     return surface* revetement.getPrixm2();
     
 }
-    
-}
-      
-          
-         
-    
 
+    
+    @Override
+    public String toString() {
+        return "Mur{" + "idMur=" + idMur + ", debut=" + debut + ", fin=" + fin + ", nbrePortes=" + nbrePortes + ", nbreFenetres=" + nbreFenetres + '}';
+    }
+
+}
