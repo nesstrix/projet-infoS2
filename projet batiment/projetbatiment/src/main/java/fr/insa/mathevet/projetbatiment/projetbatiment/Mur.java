@@ -21,7 +21,7 @@ public class Mur {
     private int nbreFenetres;
     private double hauteur;
     private uniRevetement revetement ;
-
+  
     //static int NextId = 1 ;
 
     public Mur(int idMur, Coin debut, Coin fin, double hauteur) {
@@ -107,7 +107,7 @@ public class Mur {
         double surface = Math.abs((longueur*2.5)-surfacePortes-surfaceFenetres);      
         return surface;
     }
-    
+       
    
 public void rev(uniRevetement revetement){
     this.revetement=revetement ;
