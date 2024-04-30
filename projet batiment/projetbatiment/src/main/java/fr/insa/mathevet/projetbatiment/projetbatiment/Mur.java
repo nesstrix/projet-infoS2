@@ -99,7 +99,7 @@ public class Mur {
     public double surfaceFenetres (int nbreFenetres){
         //System.out.println ("Combien il y a-t-il de fenetres ?");
         //nbreFenetres=Lire.i();
-        double surfaceFenetres = (nbreFenetres)*0.90*2.10;
+        double surfaceFenetres = (nbreFenetres)*1.20*1.20;
         return surfaceFenetres;
     }
     
