@@ -21,8 +21,8 @@ public class Plafond {
         this.idPlafond = idPlafond;
     }
     
-    public int getSol();
-    Sol surface = new Sol();
+    //public int getSol();
+    //Sol surface = new Sol();
     
 
     @Override
@@ -30,9 +30,9 @@ public class Plafond {
         return "Plafond{" + "idPlafond=" + idPlafond + ", listCoin=" + listCoin + ", listRevetement=" + listRevetement + '}';
     }
     
-   public double Surface (Sol sol ) {
-       double spalfond ;
-       splafond = sol.getsurfacesol();
+   //public double Surface (Sol sol ) {
+       //double spalfond ;
+       //splafond = sol.getsurfacesol();
        
        
    }
