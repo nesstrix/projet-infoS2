@@ -24,7 +24,7 @@ public class Revetement {
     public static uniRevetement[] remplirRevetements() {
         List<uniRevetement> revetements = new ArrayList<>();
         
-         try (BufferedReader br = new BufferedReader(new FileReader("revetementss .txt"))) {
+         try (BufferedReader br = new BufferedReader(new FileReader("revetementss.txt"))) {
             String ligne;
             while ((ligne = br.readLine()) != null) {
                 String[] elmt = ligne.split(";");
