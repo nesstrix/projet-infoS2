@@ -21,16 +21,18 @@ public class Mur {
     private int nbreFenetres;
     private double hauteur;
     private uniRevetement revetement ;
+    Revetement rev ;
   
     //static int NextId = 1 ;
 
-    public Mur(int idMur, Coin debut, Coin fin, double hauteur) {
+    public Mur(int idMur, Coin debut, Coin fin, double hauteur, Revetement rev) {
         this.idMur = idMur;
         this.debut = debut;
         this.fin = fin;
         this.nbrePortes = nbrePortes;
         this.nbreFenetres = nbreFenetres;
         this.hauteur = hauteur;
+        this.rev = rev;
     }
 
     public int getIdMur() {
@@ -84,7 +86,7 @@ public class Mur {
         return hauteur;
     }
    
-    public double Longueur (Coin debut, Coin fin){
+    public double Longueur (){
        double longueur = Math.sqrt(Math.pow(this.debut.getX() - this.fin.getX(),2) + Math.pow(this.debut.getY() - this.fin.getY(),2));
        return longueur;
     }
