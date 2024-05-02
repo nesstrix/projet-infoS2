@@ -16,31 +16,68 @@ import java.util.LinkedList;
 
 public class Sol {
     
-    private int idsol ;
-    ArrayList<Coin> listCoin = new ArrayList<Coin>();
-    private Mur mur1 ;
-    private Mur mur2 ;
-
-    public Sol(int idsol) {
-        this.idsol = idsol;
-        //this.longueur1 = longueur1;
-        //this.longueur2 = longueur2;
+    int idSol;
+    Mur mur1;
+    Mur mur2;
+    Revetement rev;
+    private uniRevetement revetement ;
+    
+       public Sol(int idSol, Mur Longueur, Mur largeur, Revetement rev) {
+        this.idSol = idSol;
+        this.mur1 = largeur;
+        this.mur2 = Longueur;
+        this.rev = rev;
     }
-
+  
+  
     @Override
     public String toString() {
-        return "Sol{" + "idsol=" + idsol + '}';
+        return "Sol{" + "idSol=" + idSol + ", mur1 = " + mur1 + ", mur2 = " + mur2 + ", rev = " + rev +  '}';
     }
     
+    public double surface(){
+        double surface = (this.mur1.Longueur()) * (this.mur2.Longueur());
+        return surface ;
+    }
+    
+    
+public void rev(uniRevetement revetement){
+    this.revetement=revetement ;
+}
 
-    public int getIdsol() {
-        return idsol;
+public void optionRev(uniRevetement[] revetements){
+    System.out.println("Voici vos options de revêtements pour vos murs : ");
+    for(uniRevetement rev : revetements){
+        if (rev.isPourMur()){
+            System.out.println("id : " +rev.getId()+ " : "+ rev.getNom() +" au prix de : "+ rev.getPrixm2());
+        }
+    }
+}
+
+public uniRevetement choisirRevetement(uniRevetement[] revetements, int choixId) {
+        for (uniRevetement rev : revetements) {
+            if (rev.getId() == choixId && rev.isPourMur()) {
+                return rev;
+            }
+        }
+        return null; // Retourne null si aucun revêtement correspondant n'est trouvé
+    }
+ 
+public double prixsol(double surface){
+    System.out.println(surface* revetement.getPrixm2());
+    return surface* revetement.getPrixm2();
+    
+}
+
+
+    public int getIdSol() {
+        return idSol;
     }
 
     public void setIdsol(int idsol) {
-        this.idsol = idsol;
+        this.idSol = idSol;
     }
-    
+}
     //private int idsol ;
     //ArrayList<Coin> listCoin = new ArrayList<Coin>();
     //private Coin ca ;
@@ -81,13 +118,13 @@ public class Sol {
         //this.idsol = idsol;
     //}
 
-    public ArrayList<Coin> getListCoin() {
-        return listCoin;
-    }
+    //public ArrayList<Coin> getListCoin() {
+      //  return listCoin;
+   // }
 
-    public void setListCoin(ArrayList<Coin> listCoin) {
-        this.listCoin = listCoin;
-    }
+    //public void setListCoin(ArrayList<Coin> listCoin) {
+     //   this.listCoin = listCoin;
+    //}
     
 //ArrayList<Coin> listCoin = new ArrayList<Coin>();
 //listCoin.add(ca);
@@ -120,5 +157,5 @@ public class Sol {
     //public double getsurface(){
     //return Surface ;
   //}
-}
+
 
