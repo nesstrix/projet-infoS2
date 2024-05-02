@@ -20,7 +20,7 @@ public class Piece {
     private List<Mur> listMurs;
     static int Nextid = 0; 
 
-    public Piece(int idPiece, int sol, int plafond, double hauteur, List<Mur> listMurs) {
+    public Piece(int idPiece, int sol, int plafond, double hauteur, List<Mur> listMurs ) {
         this.idPiece = Nextid ++;
         this.sol = sol;
         this.plafond = plafond;
