@@ -84,7 +84,7 @@ public class Mur {
         return hauteur;
     }
    
-    public double Longueur (Coin debut, Coin fin){
+    public double Longueur (){
        double longueur = Math.sqrt(Math.pow(this.debut.getX() - this.fin.getX(),2) + Math.pow(this.debut.getY() - this.fin.getY(),2));
        return longueur;
     }
