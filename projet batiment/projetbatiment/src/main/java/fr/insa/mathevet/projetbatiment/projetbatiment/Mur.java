@@ -21,16 +21,18 @@ public class Mur {
     private int nbreFenetres;
     private double hauteur;
     private uniRevetement revetement ;
+    Revetement rev ;
   
     //static int NextId = 1 ;
 
-    public Mur(int idMur, Coin debut, Coin fin, double hauteur) {
+    public Mur(int idMur, Coin debut, Coin fin, double hauteur, Revetement rev) {
         this.idMur = idMur;
         this.debut = debut;
         this.fin = fin;
         this.nbrePortes = nbrePortes;
         this.nbreFenetres = nbreFenetres;
         this.hauteur = hauteur;
+        this.rev = rev;
     }
 
     public int getIdMur() {
