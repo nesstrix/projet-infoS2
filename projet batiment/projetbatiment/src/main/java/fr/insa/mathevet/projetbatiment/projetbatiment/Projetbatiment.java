@@ -45,9 +45,10 @@ public class Projetbatiment {
         for (int i = 0; i < nbPieces; i++) {
             System.out.println("Configuration de la pièce numéro " + (i + 1));
             List<Mur> murs = new ArrayList<>();
+            double coutTotal = 0;
 
             for (int j = 0; j < 4; j++) {
-                System.out.println("Mur " + (j + 1) + ": Entrez les coordonnées de début (x puis y):");
+                System.out.println("Mur "+i+" "+ (j + 1) + ": Entrez les coordonnées de début (x puis y):");
                 int Coindebut = ++compteurCoin;
                 double debutX = Lire.d();
                 double debutY = Lire.d();
@@ -65,8 +66,7 @@ public class Projetbatiment {
                 System.out.println("Nombre de fenêtres sur ce mur:");
                 int nbFenetres = Lire.i();
 
-                // Création du mur
-                Mur mur = new Mur(j, debut, fin, 2.5);  // Hauteur fixe pour simplification
+                Mur mur = new Mur(j, debut, fin, 2.5, null);  // Hauteur fixe pour simplification
                 mur.setNbrePortes(nbPortes);
                 mur.setNbreFenetres(nbFenetres);
 
@@ -81,47 +81,61 @@ public class Projetbatiment {
                 System.out.println("Entrez l'ID du revêtement que vous souhaitez pour ce mur:");
                 int idRevetement = Lire.i();
                 uniRevetement revetementChoi = null ;
-
-               
+             
                 for (uniRevetement rev : revetements) {
                     if (rev.getId() == idRevetement && rev.isPourMur()) {
-                        mur.setRevetement(rev);
-                        revetementChoi = rev ;
-                        System.out.println("Revêtement choisi : " + rev.getNom());
+                      mur.setRevetement(rev);
+                      revetementChoi = rev ;
+                      System.out.println("Revêtement choisi : " + rev.getNom());
                   
-                    }
+                  }
                 }
-                        if (revetementChoi != null){
-                            double longueur =mur.Longueur(debut, fin) ;
-                    double surfacePortes = mur.surfacePortes(nbPortes);
-                    double surfaceFenetres = mur.surfaceFenetres(nbFenetres);
-                    double surfaceMur = mur.surface(surfacePortes, surfaceFenetres, longueur);
-                    double cout = surfaceMur * revetementChoi.getPrixm2();
-                    System.out.println("Surface du mur après déductions : " + surfaceMur + " m²");
-                    System.out.println("Coût pour revêtir le mur : " + cout + "€");
-                    murs.add(mur);
+                      if (revetementChoi != null){
+                        double longueur =mur.Longueur() ;
+                        double surfacePortes = mur.surfacePortes(nbPortes);
+                        double surfaceFenetres = mur.surfaceFenetres(nbFenetres);
+                        double surfaceMur = mur.surface(surfacePortes, surfaceFenetres, longueur);
+                        double cout = surfaceMur * revetementChoi.getPrixm2();
+                        coutTotal += cout;
+                        System.out.println("Surface du mur après déductions : " + surfaceMur + " m²");
+                        System.out.println("Coût pour revêtir le mur : " + cout + "€");
+                        murs.add(mur);
                 } else {
                     System.out.println("Aucun revêtement valide sélectionné pour ce mur.");
                 }
                         
-                // Calcul et affichage de la surface et du coût
-                double longueur = mur.Longueur(debut, fin);
-                double surfacePortes = mur.surfacePortes(nbPortes);
-                double surfaceFenetres = mur.surfaceFenetres(nbFenetres);
-                double surfaceMur = mur.surface(surfacePortes, surfaceFenetres, longueur);
-                System.out.println("Surface du mur après déductions : " + surfaceMur + " m²");
-                murs.add(mur);
+              murs.add(mur);
+                
+               
+            }
+                        
+            System.out.println("Options de revêtement pour le sol:");
+            for (uniRevetement rev : revetements) {
+                if (rev.isPourSol()) {
+                    System.out.println("ID: " + rev.getId() + " - " + rev.getNom() + " à " + rev.getPrixm2() + "€ par m²");
+                }
             }
 
-            // Création de la pièce avec les murs configurés
-            Piece piece = new Piece(i, 0, 0, 2.5, murs);  // IDs sol et plafond non utilisés pour simplification
-            listPieces.add(piece);
-        }
+            System.out.println("Entrez l'ID du revêtement que vous souhaitez pour le sol:");
+            int idRevetementSol = Lire.i();
+            for (uniRevetement rev : revetements) {
+                if (rev.getId() == idRevetementSol && rev.isPourSol()) {
+                    Sol sol = new Sol(i, murs.get(0), murs.get(1), null);
+                    double surfaceSol = sol.surface();
+                    double coutSol = surfaceSol * rev.getPrixm2();
+                    coutTotal += coutSol;
+                    System.out.println("Revêtement choisi pour le sol: " + rev.getNom() + ", Surface du sol: " + surfaceSol + " m², Coût: " + coutSol + "€");
+                  }
+            }
 
-       
-        System.out.println("Voici les pièces créées :");
+            Piece piece = new Piece(i, i, i, 2.5, murs); 
+            listPieces.add(piece);
+            System.out.println("Coût total pour la pièce numéro " + (i + 1) + ": " + coutTotal + " €");
+            
+       }System.out.println("Voici les pièces créées :");
         for (Piece piece : listPieces) {
             System.out.println(piece);
         }
-    }
-}
+    } }
+
+            
