@@ -13,6 +13,9 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Projetbatiment {
 
@@ -125,36 +128,68 @@ public class Projetbatiment {
                 }
             }
 
+            
             System.out.println("Entrez l'ID du revêtement que vous souhaitez pour le sol:");
             int idRevetementSol = Lire.i();
-            for (uniRevetement rev : revetements) {
-                if (rev.getId() == idRevetementSol && rev.isPourSol()) {
+            for (uniRevetement revS : revetements) {
+                if (revS.getId() == idRevetementSol && revS.isPourSol()) {
                     Sol sol = new Sol(i, murs.get(0), murs.get(1), null);
                     double surfaceSol = sol.surface();
-                    double coutSol = surfaceSol * rev.getPrixm2();
+                    double coutSol = surfaceSol * revS.getPrixm2();
                     coutTotal += coutSol;
-                    System.out.println("Revêtement choisi pour le sol: " + rev.getNom() + ", Surface du sol: " + surfaceSol + " m², Coût: " + coutSol + "€");
+                    System.out.println("Revêtement choisi pour le sol: " + revS.getNom() + ", Surface du sol: " + surfaceSol + " m², Coût: " + coutSol + "€");
                     
-                    ctparRevetement.merge(rev.getNom(), coutSol, Double::sum);
+                    ctparRevetement.merge(revS.getNom(), coutSol, Double::sum);
+                    stparRevetement.merge(revS.getNom(), surfaceSol, Double::sum);
+                  }
+                
+            } 
+                
+                System.out.println("Options de revêtement pour le plafond:");
+                for (uniRevetement revP : revetements) {
+                if (revP.isPourPlafond()) {
+                    System.out.println("ID: " + revP.getId() + " - " + revP.getNom() + " à " + revP.getPrixm2() + "€ par m²");
+                }
+            }
+            
+
+            System.out.println("Entrez l'ID du revêtement que vous souhaitez pour le plafond:");
+            int idRevetementPlafond = Lire.i();
+            for (uniRevetement rev : revetements) {
+                if (rev.getId() == idRevetementPlafond && rev.isPourPlafond()) {
+                    Sol sol = new Sol(i, murs.get(0), murs.get(1), null);   // on peut garder la surface du sol, car surface sol et plafond sont les mêmes
+                    double surfaceSol = sol.surface();
+                    double coutPlafond = surfaceSol * rev.getPrixm2();
+                    coutTotal += coutPlafond;
+                    System.out.println("Revêtement choisi pour le plafond: " + rev.getNom() + ", Surface du plafond: " + surfaceSol + " m², Coût: " + coutPlafond + "€");
+                    
+                    ctparRevetement.merge(rev.getNom(), coutPlafond, Double::sum);
                     stparRevetement.merge(rev.getNom(), surfaceSol, Double::sum);
                   }
             }
-
-            Piece piece = new Piece(i, i, i, 2.5, murs); 
-            listPieces.add(piece);
-            System.out.println("Coût total pour la pièce numéro " + (i + 1) + ": " + coutTotal + " €");
+            
+            if (i == nbPieces - 1) {  // Après la dernière pièce
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("Devis.txt"))) {
+                    writer.write("Coût total global: " + coutTotal + " €\n");
+                    writer.write("Détails des coûts et surfaces par revêtement:\n");
+                    ctparRevetement.forEach((revName, cost) -> {
+                        try {
+                            writer.write("Revêtement: " + revName + ", Coût Total: " + cost + "€, Surface Totale: " + stparRevetement.get(revName) + " m²\n");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    writer.flush();
+                    System.out.println("Devis sauvegardé dans 'Devis.txt'.");
+                } catch (IOException e) {
+                    System.out.println("Erreur lors de l'écriture dans le fichier : " + e.getMessage());
+                }
+        
             
        }
-        ctparRevetement.forEach((name, cost) -> {
-            Double surface = stparRevetement.get(name);
-            System.out.println("Revetement: " + name + ", cout total pour ce revetement : " + cost + "€, surface totale pour ce revement : " + surface + " m²");
-        });
     
-       
-        System.out.println("Voici les pièces créées :");
-        for (Piece piece : listPieces) {
-            System.out.println(piece);
-        }
-    } }
+}
+    }
+}
 
             
