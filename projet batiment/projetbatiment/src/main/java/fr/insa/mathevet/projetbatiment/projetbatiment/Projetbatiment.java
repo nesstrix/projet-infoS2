@@ -12,6 +12,7 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
  */
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 
 public class Projetbatiment {
 
@@ -39,6 +40,9 @@ public class Projetbatiment {
 
         System.out.println("Combien de pièces voulez-vous?");
         int nbPieces = Lire.i();
+        HashMap<String, Double> ctparRevetement = new HashMap<>();
+        HashMap<String, Double> stparRevetement = new HashMap<>();
+
 
         List<Piece> listPieces = new ArrayList<>();
         
@@ -46,9 +50,10 @@ public class Projetbatiment {
             System.out.println("Configuration de la pièce numéro " + (i + 1));
             List<Mur> murs = new ArrayList<>();
             double coutTotal = 0;
+            
 
             for (int j = 0; j < 4; j++) {
-                System.out.println("Mur "+i+" "+ (j + 1) + ": Entrez les coordonnées de début (x puis y):");
+                System.out.println("Mur "+(i+1)+" "+ (j + 1) + ": Entrez les coordonnées de début (x puis y):");
                 int Coindebut = ++compteurCoin;
                 double debutX = Lire.d();
                 double debutY = Lire.d();
@@ -87,7 +92,7 @@ public class Projetbatiment {
                       mur.setRevetement(rev);
                       revetementChoi = rev ;
                       System.out.println("Revêtement choisi : " + rev.getNom());
-                  
+                      
                   }
                 }
                       if (revetementChoi != null){
@@ -100,6 +105,10 @@ public class Projetbatiment {
                         System.out.println("Surface du mur après déductions : " + surfaceMur + " m²");
                         System.out.println("Coût pour revêtir le mur : " + cout + "€");
                         murs.add(mur);
+                        
+                        ctparRevetement.merge( revetementChoi.getNom(), cout, Double::sum);
+                        stparRevetement.merge(revetementChoi.getNom(), surfaceMur, Double::sum);
+
                 } else {
                     System.out.println("Aucun revêtement valide sélectionné pour ce mur.");
                 }
@@ -125,6 +134,9 @@ public class Projetbatiment {
                     double coutSol = surfaceSol * rev.getPrixm2();
                     coutTotal += coutSol;
                     System.out.println("Revêtement choisi pour le sol: " + rev.getNom() + ", Surface du sol: " + surfaceSol + " m², Coût: " + coutSol + "€");
+                    
+                    ctparRevetement.merge(rev.getNom(), coutSol, Double::sum);
+                    stparRevetement.merge(rev.getNom(), surfaceSol, Double::sum);
                   }
             }
 
@@ -132,7 +144,14 @@ public class Projetbatiment {
             listPieces.add(piece);
             System.out.println("Coût total pour la pièce numéro " + (i + 1) + ": " + coutTotal + " €");
             
-       }System.out.println("Voici les pièces créées :");
+       }
+        ctparRevetement.forEach((name, cost) -> {
+            Double surface = stparRevetement.get(name);
+            System.out.println("Revetement: " + name + ", cout total pour ce revetement : " + cost + "€, surface totale pour ce revement : " + surface + " m²");
+        });
+    
+       
+        System.out.println("Voici les pièces créées :");
         for (Piece piece : listPieces) {
             System.out.println(piece);
         }
