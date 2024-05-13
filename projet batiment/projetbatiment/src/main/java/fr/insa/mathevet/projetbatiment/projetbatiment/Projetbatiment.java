@@ -37,22 +37,28 @@ public class Projetbatiment {
             System.out.println("Combien de niveaux voulez-vous pour la maison?");
             nbNiveaux = Lire.i();
         } else {
-            System.out.println("Combien d'appartements voulez-vous dans l'immeuble?");
+            System.out.println("Combien de niveaux voulez-vous dans l'immeuble?");
             nbNiveaux = Lire.i();  //1 niveau = 1 appart
+            
         }
 
-        System.out.println("Combien de pièces voulez-vous?");
-        int nbPieces = Lire.i();
+        //System.out.println("Combien de pièces voulez-vous?");
+        //int nbPieces = Lire.i();
         HashMap<String, Double> ctparRevetement = new HashMap<>();
         HashMap<String, Double> stparRevetement = new HashMap<>();
+        double coutTotal = 0;
 
-
-        List<Piece> listPieces = new ArrayList<>();
+        
+        
+        for (int k = 0; k < nbNiveaux; k++){
+            System.out.println("Combien de pièces voulez-vous?");
+            int nbPieces = Lire.i();
+            List<Piece> listPieces = new ArrayList<>();
         
         for (int i = 0; i < nbPieces; i++) {
             System.out.println("Configuration de la pièce numéro " + (i + 1));
             List<Mur> murs = new ArrayList<>();
-            double coutTotal = 0;
+            
             
 
             for (int j = 0; j < 4; j++) {
@@ -191,5 +197,6 @@ public class Projetbatiment {
 }
     }
 }
-
+    
+}
             
