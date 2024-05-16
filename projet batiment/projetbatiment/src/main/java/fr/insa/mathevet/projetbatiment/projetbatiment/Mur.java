@@ -13,6 +13,7 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
  */
 import java.lang.Math;
 
+
 public class Mur {
     private int idMur;
     private Coin debut;

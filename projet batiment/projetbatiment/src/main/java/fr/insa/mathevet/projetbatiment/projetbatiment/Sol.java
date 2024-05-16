@@ -4,6 +4,7 @@
  */
 package fr.insa.mathevet.projetbatiment.projetbatiment;
 
+
 /**
  *
  * @author minasseessam , emma0
@@ -73,4 +74,5 @@ public double prixsol(double surface){
     public void setIdsol(int idsol) {
         this.idSol = idSol;
     }
-}
+    
+   }

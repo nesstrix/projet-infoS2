@@ -50,6 +50,7 @@ public class Coin {
         this.y = y;
     }
     
-    
+    public static int rayon = 4;
+   
     
 }
