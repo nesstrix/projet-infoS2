@@ -64,11 +64,32 @@ public class MainPain extends BorderPane {
                     //System.out.println("bouton b cliqué");
                 //)
         //));
-        VBox vbDroite = new VBox (this.b, this.couleur);
+        VBox vbDroite = new VBox (this.b);
         this.setRight(vbDroite);
         
         //this.c = new DCanvas (this);
         this.setCenter(this.c);
         
+        
+    }
+    
+    public void redrawAll() {
+        this.cDessin
+    }
+    
+    public RadioButton getRb() {
+        return rb;
+    }
+
+    public Button getB() {
+        return b;
+    }
+
+    public Button getCouleur() {
+        return couleur;
+    }
+
+    public Canvas getC() {
+        return c;
     }
 }
