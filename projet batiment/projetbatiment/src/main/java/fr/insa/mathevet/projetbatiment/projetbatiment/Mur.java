@@ -12,6 +12,8 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
  * @author emma0
  */
 import java.lang.Math;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Mur {
     private int idMur;
