@@ -113,7 +113,7 @@ public class Projetbatiment extends JFrame {
                 JOptionPane.showMessageDialog(null, "Veuillez entrer un nombre valide de niveaux.", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
         }
-
+    }
     private class SaveButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -309,3 +309,4 @@ public class Projetbatiment extends JFrame {
         });
     }
 }
+
