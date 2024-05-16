@@ -28,7 +28,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import javafx.scene.control.RadioButton;
+//import javafx.scene.control.RadioButton;
+
+
 
 public class Projetbatiment extends JFrame {  
     /*au moment de l'interface nous avions du mal à créer une interface parce qu'on 
@@ -95,16 +97,22 @@ public class Projetbatiment extends JFrame {
     private class StartButtonListener implements ActionListener {           //"ecouter" le bouton
         @Override
         public void actionPerformed(ActionEvent e) {
-            String type = (String) typeconstruc.getSelectedItem();       //on récupère ce que l'utilisateur a choisi depuis l'interface
+            String type;       //on récupère ce que l'utilisateur a choisi depuis l'interface
+             if (rbMaison.isSelected()) {
+                type = "Maison";
+            } else if (rbImmeuble.isSelected()) {
+                type = "Immeuble";
+            } else {
+                JOptionPane.showMessageDialog(null, "Veuillez sélectionner un type de construction.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             try {
-                nbNiveaux = Integer.parseInt(niveauxField.getText()); 
-                //ici il récupère le nombre de niveau via l'interface
-                detpiece();
+                nbNiveaux = Integer.parseInt(niveauxField.getText());
+                detpiece(type);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Veuillez entrer un nombre valide de niveaux.", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }
 
     private class SaveButtonListener implements ActionListener {
         @Override
@@ -121,7 +129,7 @@ public class Projetbatiment extends JFrame {
         }
     }
 
-    private void detpiece() {
+    private void detpiece(String type) {
         for (int k = 0; k < nbNiveaux; k++) {
             String nbPiecesStr = JOptionPane.showInputDialog(null, "Combien de pièces voulez-vous au niveau " + (k + 1) + "?");
             try {
