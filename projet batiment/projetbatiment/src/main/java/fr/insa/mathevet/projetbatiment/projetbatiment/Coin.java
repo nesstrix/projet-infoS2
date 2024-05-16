@@ -4,9 +4,6 @@
  */
 package fr.insa.mathevet.projetbatiment.projetbatiment;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-
 /**
  *
  * @author emma0
