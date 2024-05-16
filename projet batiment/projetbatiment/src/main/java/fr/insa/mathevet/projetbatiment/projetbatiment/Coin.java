@@ -4,6 +4,9 @@
  */
 package fr.insa.mathevet.projetbatiment.projetbatiment;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
 /**
  *
  * @author emma0
@@ -50,6 +53,7 @@ public class Coin {
         this.y = y;
     }
     
-    
+    public static int rayon = 4;
+   
     
 }
