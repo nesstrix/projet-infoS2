@@ -33,13 +33,17 @@ public class DCanvas extends Pane {
         this.realCanvas.widthProperty().addListener((o) -> {
             this.redrawAll();
         });
+        this.realCanvas.setOnMouseClicked((t) -> {
+            Controleur control = this.main.getControleur();
+            control.clicDansZoneDessin(t);
+        });
         this.redrawAll();
     }
     
     public void redrawAll () {
         
         GraphicsContext context = this.realCanvas.getGraphicsContext2D();
-        context.setFill(Color.WHITE);
+        context.setFill(Color.RED);
         context.fillRect(0,0, this.realCanvas.getWidth(), this.realCanvas.getHeight());
         
     }
