@@ -29,7 +29,7 @@ public class Pan2D extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
         drawPieces(g);
-        Graphics2D gl = (Graphics2D) g;
+        Graphics2D gl = (Graphics2D) g;  // nous permettra de definir la largeur des traits
         gl.setStroke(new BasicStroke(5));   //pour que le trait du mur soit plus épais sinon pas très beau 
     }
     
@@ -37,24 +37,18 @@ public class Pan2D extends JPanel{
         double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE;
         double maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE;
         g.setColor(Color.BLACK);
-        for (Piece piece : pieces){
-           
+        for (Piece piece : pieces){  //itérations par pièces    
             
-            //double totalX = 0;
-            //double totalY = 0;
-            //int coinCount = 0;
-            
-         
             for (Mur mur : piece.getListMurs()){
                 Coin debut = mur.getDebut();
                 Coin fin = mur.getFin();
                 //gl.setLineWidth(8);
                 
+                //on calcule les coordonnées minimales et maximales pour determnier les grandeurs du dessin
                 minX = Math.min(minX, Math.min(debut.getX(), fin.getX()));      
                 minY = Math.min(minY, Math.min(debut.getY(), fin.getY()));
                 maxX = Math.max(maxX, Math.max(debut.getX(), fin.getX()));
                 maxY = Math.max(maxY, Math.max(debut.getY(), fin.getY()));
-                
                 
                 //g.drawLine((int) debut.getX()*7, (int) debut.getY()*7, (int) fin.getX()*7, (int) fin.getY()*7);
                 // on fait *7 sinon les pièces sont beaucoup trop petites sur le dessin
@@ -68,22 +62,21 @@ public class Pan2D extends JPanel{
 
             // texte au centre de la pièce pour savoir laquelle elle est 
             //g.drawString("Piece n°" + piece.getIdPiece(), centerX, centerY);
-        
         }
-        double pieceWidth = (maxX - minX)*10;
+        double pieceWidth = (maxX - minX)*10;  //*10 pour pouvoir un plus grand dessin sinon trop petit
         double pieceHeight = (maxY - minY)*10;
         
         int panelWildth = getWidth();
         int panelHeight = getHeight();
         
-        int offsetX = (int) ((panelWildth - pieceWidth)/2 - minX*10);
+        int offsetX = (int) ((panelWildth - pieceWidth)/2 - minX*10);   //pour pouvoir centrer le dessin
         int offsetY = (int) ((panelHeight - pieceHeight)/2 - minY*10);
         
         g.setColor(Color.BLACK);
         Graphics2D gl = (Graphics2D) g;
         gl.setStroke(new BasicStroke(5));
         
-        for (Piece piece : pieces){
+        for (Piece piece : pieces){  // écrire au milieu de chaque pièce son id
             double totalX = 0;
             double totalY = 0;
             int coinCount = 0;
@@ -112,7 +105,6 @@ public class Pan2D extends JPanel{
         int textHeight = fm.getHeight();
         
         g.drawString("Piece n°" + piece.getIdPiece(), centerX - textWidth /2, centerY + textHeight /2);
-        
         
     }
     }
