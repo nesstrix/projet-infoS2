@@ -70,14 +70,14 @@ public class Pan2D extends JPanel{
             //g.drawString("Piece n°" + piece.getIdPiece(), centerX, centerY);
         
         }
-        double pieceWidth = (maxX - minX)*10;
-        double pieceHeight = (maxY - minY)*10;
+        double pieceWidth = (maxX - minX)*20;
+        double pieceHeight = (maxY - minY)*20;
         
         int panelWildth = getWidth();
         int panelHeight = getHeight();
         
-        int offsetX = (int) ((panelWildth - pieceWidth)/2 - minX*10);
-        int offsetY = (int) ((panelHeight - pieceHeight)/2 - minY*10);
+        int offsetX = (int) ((panelWildth - pieceWidth)/2 - minX*20);
+        int offsetY = (int) ((panelHeight - pieceHeight)/2 - minY*20);
         
         g.setColor(Color.BLACK);
         Graphics2D gl = (Graphics2D) g;
@@ -92,10 +92,10 @@ public class Pan2D extends JPanel{
                 Coin debut = mur.getDebut();
                 Coin fin = mur.getFin();
             
-                int debutX = (int) (debut.getX()*10 + offsetX);
-                int debutY = (int) (debut.getY()*10 + offsetY);
-                int finX = (int) (fin.getX()*10 + offsetX);
-                int finY = (int) (fin.getY()*10 + offsetY);
+                int debutX = (int) (debut.getX()*20 + offsetX);
+                int debutY = (int) (debut.getY()*20 + offsetY);
+                int finX = (int) (fin.getX()*20 + offsetX);
+                int finY = (int) (fin.getY()*20 + offsetY);
                 
                 g.drawLine(debutX, debutY, finX,finY);
                 
@@ -104,8 +104,8 @@ public class Pan2D extends JPanel{
                 coinCount += 2;
         }
         
-        int centerX = (int) ((totalX / coinCount)*10 + offsetX);
-        int centerY = (int) ((totalY / coinCount)*10 + offsetY);  
+        int centerX = (int) ((totalX / coinCount)*20 + offsetX);
+        int centerY = (int) ((totalY / coinCount)*20 + offsetY);  
         
         FontMetrics fm = g.getFontMetrics();
         int textWidth = fm.stringWidth("Piece n°" + piece.getIdPiece());
