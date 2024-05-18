@@ -34,33 +34,89 @@ public class Pan2D extends JPanel{
     }
     
     public void drawPieces(Graphics g){
+        double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE;
+        double maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE;
         g.setColor(Color.BLACK);
         for (Piece piece : pieces){
+           
             
-            double totalX = 0;
-            double totalY = 0;
+            //double totalX = 0;
+            //double totalY = 0;
+            //int coinCount = 0;
             
-
+         
             for (Mur mur : piece.getListMurs()){
                 Coin debut = mur.getDebut();
                 Coin fin = mur.getFin();
                 //gl.setLineWidth(8);
                 
-                g.drawLine((int) debut.getX()*7, (int) debut.getY()*7, (int) fin.getX()*7, (int) fin.getY()*7);
+                minX = Math.min(minX, Math.min(debut.getX(), fin.getX()));
+                minY = Math.min(minY, Math.min(debut.getY(), fin.getY()));
+                maxX = Math.max(maxX, Math.max(debut.getX(), fin.getX()));
+                maxY = Math.max(maxY, Math.max(debut.getY(), fin.getY()));
+                
+                
+                //g.drawLine((int) debut.getX()*7, (int) debut.getY()*7, (int) fin.getX()*7, (int) fin.getY()*7);
                 // on fait *7 sinon les pièces sont beaucoup trop petites sur le dessin
-                totalX += debut.getX() * 10 + fin.getX() * 10;   
-                totalY += debut.getY() * 10 + fin.getY() * 10;
+                //totalX += debut.getX() * 10 + fin.getX() * 10;   
+                //totalY += debut.getY() * 10 + fin.getY() * 10;
                 //murCount += 2;   //parce qu'un mur contient 2 coins 
                 //pour compter nmb de coins totaux des murs
             }
-            int centerX = (int) (totalX / 2);   // moy des coordonnées x y pour obtenir position moyenne
-            int centerY = (int) (totalY / 2);
+            //int centerX = (int) (totalX / 2);   // moy des coordonnées x y pour obtenir position moyenne
+            //int centerY = (int) (totalY / 2);
 
             // texte au centre de la pièce pour savoir laquelle elle est 
-            g.drawString("Piece n°" + piece.getIdPiece(), centerX, centerY);
+            //g.drawString("Piece n°" + piece.getIdPiece(), centerX, centerY);
         
         }
+        double pieceWidth = (maxX - minX)*10;
+        double pieceHeight = (maxY - minY)*10;
+        
+        int panelWildth = getWidth();
+        int panelHeight = getHeight();
+        
+        int offsetX = (int) ((panelWildth - pieceWidth)/2 - minX*10);
+        int offsetY = (int) ((panelHeight - pieceHeight)/2 - minY*10);
+        
+        g.setColor(Color.BLACK);
+        Graphics2D gl = (Graphics2D) g;
+        gl.setStroke(new BasicStroke(5));
+        
+        for (Piece piece : pieces){
+            double totalX = 0;
+            double totalY = 0;
+            int coinCount = 0;
+            
+            for (Mur mur : piece.getListMurs()){
+                Coin debut = mur.getDebut();
+                Coin fin = mur.getFin();
+            
+                int debutX = (int) (debut.getX()*10 + offsetX);
+                int debutY = (int) (debut.getY()*10 + offsetY);
+                int finX = (int) (fin.getX()*10 + offsetX);
+                int finY = (int) (fin.getY()*10 + offsetY);
+                
+                g.drawLine(debutX, debutY, finX,finY);
+                
+                totalX += debut.getX() + fin.getX();
+                totalY += debut.getY() + fin.getY();
+                coinCount += 2;
+        }
+        
+        int centerX = (int) ((totalX / coinCount)*10 + offsetX);
+        int centerY = (int) ((totalY / coinCount)*10 + offsetY);  
+        
+        FontMetrics fm = g.getFontMetrics();
+        int textWidth = fm.stringWidth("Piece n°" + piece.getIdPiece());
+        int textHeight = fm.getHeight();
+        
+        g.drawString("Piece n°" + piece.getIdPiece(), centerX - textWidth /2, centerY + textHeight /2);
+        
+        
     }
+    }
+    
     
     public void setPieces(List<Piece> pieces){
         this.pieces = pieces ;
