@@ -18,8 +18,10 @@ import fr.insa.mathevet.projetbatiment.projetbatiment.Revetement;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Sol;
 import fr.insa.mathevet.projetbatiment.projetbatiment.uniRevetement;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -247,7 +249,8 @@ public class Projetbatiment extends JFrame {
 
     private void sauvegardeDev() {
         String type = rbMaison.isSelected() ? "Maison" : rbImmeuble.isSelected() ? "Immeuble" : "Inconnu";
-        try (FileWriter writer = new FileWriter("devis.txt")) {
+        File file = new File("Devis.txt");
+        try (FileWriter writer = new FileWriter(file)) {
             writer.write("Devis pour le projet de construction\n\n");
             writer.write("Type de construction: " + type + "\n");
             writer.write("Nombre de niveaux: " + nbNiveaux + "\n");
@@ -257,18 +260,27 @@ public class Projetbatiment extends JFrame {
                 writer.write("Revêtement: " + revName + ", Coût Total: " + ctparRevetement.get(revName) + "€, Surface Totale: " + stparRevetement.get(revName) + " m²\n");
             }
             JOptionPane.showMessageDialog(this, "Devis sauvegardé dans 'devis.txt'.");
+            JOptionPane.showMessageDialog(this, "Informations sur le bâtiment sauvegardées dans 'informations_batiment.txt'.");
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(file);
+            }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Erreur lors de la sauvegarde du devis.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void enregistrerinfos() {
-        try (FileWriter writer = new FileWriter("informations_batiment.txt")) {
+        File file = new File("informations_batiment.txt");
+        try (FileWriter writer = new FileWriter(file)) {
             writer.write("Informations sur les pièces du bâtiment :\n\n");
             for (Piece piece : pieces) {
                 writer.write(piece.toString() + "\n");
             }
             JOptionPane.showMessageDialog(this, "Informations sur le bâtiment sauvegardées dans 'informations_batiment.txt'.");
+            JOptionPane.showMessageDialog(this, "Informations sur le bâtiment sauvegardées dans 'informations_batiment.txt'.");
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(file);
+            }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Erreur lors de la sauvegarde des informations du bâtiment.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }

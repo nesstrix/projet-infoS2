@@ -50,7 +50,7 @@ public class Pan2D extends JPanel{
                 Coin fin = mur.getFin();
                 //gl.setLineWidth(8);
                 
-                minX = Math.min(minX, Math.min(debut.getX(), fin.getX()));
+                minX = Math.min(minX, Math.min(debut.getX(), fin.getX()));      
                 minY = Math.min(minY, Math.min(debut.getY(), fin.getY()));
                 maxX = Math.max(maxX, Math.max(debut.getX(), fin.getX()));
                 maxY = Math.max(maxY, Math.max(debut.getY(), fin.getY()));
