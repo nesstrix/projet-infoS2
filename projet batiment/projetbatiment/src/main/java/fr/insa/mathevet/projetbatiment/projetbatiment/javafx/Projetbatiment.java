@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Projetbatiment extends JFrame {
     private JTextField niveauxField;
@@ -37,6 +38,8 @@ public class Projetbatiment extends JFrame {
     private List<Piece> pieces = new ArrayList<>();
     private JRadioButton rbMaison;
     private JRadioButton rbImmeuble;
+    private Map<Integer, List<Piece>> piecesParNiveau = new HashMap<>();
+    private JComboBox<Integer> niveauComboBox;
 
     public Projetbatiment() {
         setTitle("Projet Batiment");
@@ -70,6 +73,10 @@ public class Projetbatiment extends JFrame {
         startButton.addActionListener(new StartButtonListener());
         panel.add(startButton);
 
+        panel.add(new JLabel ("Selectionnez le niveau à afficher: "));
+        niveauComboBox = new JComboBox <>();
+        panel.add(niveauComboBox);
+        
         JButton saveButton = new JButton("Sauvegarder Devis");
         saveButton.addActionListener(new SaveButtonListener());
         panel.add(saveButton);
@@ -118,10 +125,13 @@ public class Projetbatiment extends JFrame {
     }
 
     private void detpiece(String type) {
+        niveauComboBox.removeAllItems();
         for (int k = 0; k < nbNiveaux; k++) {
+            niveauComboBox.addItem(k + 1);
             String nbPiecesStr = JOptionPane.showInputDialog(null, "Combien de pièces voulez-vous au niveau " + (k + 1) + "?");
             try {
                 int nbPieces = Integer.parseInt(nbPiecesStr);
+                List<Piece> piecesNiveau = new ArrayList();
                 for (int i = 0; i < nbPieces; i++) {
                     JOptionPane.showMessageDialog(null, "Configuration de la pièce numéro " + (i + 1) + " au niveau " + (k + 1));
                     List<Mur> murs = new ArrayList<>();
@@ -132,8 +142,9 @@ public class Projetbatiment extends JFrame {
                     int plafondId = detplafond(i, murs);
 
                     Piece piece = new Piece(i, solId, plafondId, 2.5, murs);
-                    pieces.add(piece);
+                    piecesNiveau.add(piece);
                 }
+                piecesParNiveau.put(k+1, piecesNiveau);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Veuillez entrer un nombre valide de pièces.", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
@@ -273,8 +284,14 @@ public class Projetbatiment extends JFrame {
         File file = new File("informations_batiment.txt");
         try (FileWriter writer = new FileWriter(file)) {
             writer.write("Informations sur les pièces du bâtiment :\n\n");
-            for (Piece piece : pieces) {
-                writer.write(piece.toString() + "\n");
+            for (Map.Entry<Integer, List<Piece>> entry : piecesParNiveau.entrySet() ){
+                int niveau = entry.getKey();
+                List<Piece> piecesNiveau = entry.getValue();
+                writer.write("Niveau"+ niveau + ":\n");
+                for (Piece piece : piecesNiveau) {
+                    writer.write(piece.toString() + "\n");
+            }
+            writer.write("\n");
             }
             JOptionPane.showMessageDialog(this, "Informations sur le bâtiment sauvegardées dans 'informations_batiment.txt'.");
             JOptionPane.showMessageDialog(this, "Informations sur le bâtiment sauvegardées dans 'informations_batiment.txt'.");
@@ -287,11 +304,18 @@ public class Projetbatiment extends JFrame {
     }
 
     private void dessinerPlan2D() {
-        JFrame planFrame = new JFrame("Plan 2D du bâtiment");
+        Integer niveauSelectionne = (Integer) niveauComboBox.getSelectedItem(); 
+        if (niveauSelectionne != null){
+            List<Piece> piecesNiveau = piecesParNiveau.get(niveauSelectionne);
+        
+        JFrame planFrame = new JFrame("Plan 2D du bâtiment - Niveau" + niveauSelectionne);
         planFrame.setSize(800, 600);
         planFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        planFrame.add(new Pan2D(pieces));
+        planFrame.add(new Pan2D(piecesNiveau));
         planFrame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Veuillez selectionner un niveau.", "Erreur",JOptionPane.ERROR_MESSAGE );
+        }
     }
 
     public static void main(String[] args) {
