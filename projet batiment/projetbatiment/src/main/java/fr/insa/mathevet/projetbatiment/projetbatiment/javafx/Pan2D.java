@@ -31,7 +31,7 @@ public class Pan2D extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
         drawPieces(g);
-        Graphics2D gl = (Graphics2D) g;
+        Graphics2D gl = (Graphics2D) g;  // nous permettra de definir la largeur des traits
         gl.setStroke(new BasicStroke(5));   //pour que le trait du mur soit plus épais sinon pas très beau 
     }
     
@@ -39,8 +39,8 @@ public class Pan2D extends JPanel{
         double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE; //Calculer les limites des pièces 
         double maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE;
         g.setColor(Color.BLACK);
-        for (Piece piece : pieces){
-           
+        for (Piece piece : pieces){  //itérations par pièces    
+            
             
             //double totalX = 0;
             //double totalY = 0;
@@ -52,6 +52,7 @@ public class Pan2D extends JPanel{
                 Coin fin = mur.getFin();
                 //gl.setLineWidth(8);
                 
+                //on calcule les coordonnées minimales et maximales pour determnier les grandeurs du dessin
                 minX = Math.min(minX, Math.min(debut.getX(), fin.getX()));      
                 minY = Math.min(minY, Math.min(debut.getY(), fin.getY()));
                 maxX = Math.max(maxX, Math.max(debut.getX(), fin.getX()));
@@ -70,8 +71,8 @@ public class Pan2D extends JPanel{
 
             // texte au centre de la pièce pour savoir laquelle elle est 
             //g.drawString("Piece n°" + piece.getIdPiece(), centerX, centerY);
-        
         }
+
         double pieceWidth = (maxX - minX)*20;  // taille des pièces dessinées 
         double pieceHeight = (maxY - minY)*20;
         
@@ -85,7 +86,7 @@ public class Pan2D extends JPanel{
         Graphics2D gl = (Graphics2D) g;
         gl.setStroke(new BasicStroke(5));
         
-        for (Piece piece : pieces){
+        for (Piece piece : pieces){  // écrire au milieu de chaque pièce son id
             double totalX = 0;
             double totalY = 0;
             int coinCount = 0;
@@ -114,7 +115,6 @@ public class Pan2D extends JPanel{
         int textHeight = fm.getHeight();
         
         g.drawString("Piece n°" + piece.getIdPiece(), centerX - textWidth /2, centerY + textHeight /2);
-        
         
     }
     }
