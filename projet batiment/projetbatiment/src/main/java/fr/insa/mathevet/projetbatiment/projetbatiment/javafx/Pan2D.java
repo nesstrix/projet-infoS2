@@ -11,6 +11,7 @@ package fr.insa.mathevet.projetbatiment.projetbatiment.javafx;
 
 import fr.insa.mathevet.projetbatiment.projetbatiment.Coin;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Mur;
+import fr.insa.mathevet.projetbatiment.projetbatiment.Niveau;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Piece;
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,8 @@ import java.util.List;
 public class Pan2D extends JPanel{
     
     
-    private List<Piece> pieces ;  // recup la liste des pièces donc avec les coins etc 
+    private List<Piece> pieces ;// recup la liste des pièces donc avec les coins etc 
+    
     
     public Pan2D(List<Piece> pieces){
         this.pieces = pieces ; 
@@ -34,7 +36,7 @@ public class Pan2D extends JPanel{
     }
     
     public void drawPieces(Graphics g){
-        double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE;
+        double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE; //Calculer les limites des pièces 
         double maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE;
         g.setColor(Color.BLACK);
         for (Piece piece : pieces){
@@ -70,13 +72,13 @@ public class Pan2D extends JPanel{
             //g.drawString("Piece n°" + piece.getIdPiece(), centerX, centerY);
         
         }
-        double pieceWidth = (maxX - minX)*20;
+        double pieceWidth = (maxX - minX)*20;  // taille des pièces dessinées 
         double pieceHeight = (maxY - minY)*20;
         
-        int panelWildth = getWidth();
+        int panelWildth = getWidth();  // taille du panneau 
         int panelHeight = getHeight();
         
-        int offsetX = (int) ((panelWildth - pieceWidth)/2 - minX*20);
+        int offsetX = (int) ((panelWildth - pieceWidth)/2 - minX*20);  // déterminer les décalages pour centrer les pièces 
         int offsetY = (int) ((panelHeight - pieceHeight)/2 - minY*20);
         
         g.setColor(Color.BLACK);
@@ -107,7 +109,7 @@ public class Pan2D extends JPanel{
         int centerX = (int) ((totalX / coinCount)*20 + offsetX);
         int centerY = (int) ((totalY / coinCount)*20 + offsetY);  
         
-        FontMetrics fm = g.getFontMetrics();
+        FontMetrics fm = g.getFontMetrics(); // ajustement pour centrer le texte 
         int textWidth = fm.stringWidth("Piece n°" + piece.getIdPiece());
         int textHeight = fm.getHeight();
         
@@ -122,5 +124,6 @@ public class Pan2D extends JPanel{
         this.pieces = pieces ;
         repaint();
     }
+    
     
 }
