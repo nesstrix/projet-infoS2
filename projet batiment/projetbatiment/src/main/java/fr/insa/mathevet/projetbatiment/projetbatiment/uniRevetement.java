@@ -49,4 +49,16 @@ public class uniRevetement {
     public double getPrixm2() {
         return prixm2;
     }
+    
+    
+    public static uniRevetement fromString(String str) {
+        String[] parts = str.split(",");
+        int id = Integer.parseInt(parts[0].trim());
+        String nom = parts[1].trim();
+        boolean pourMur = Boolean.parseBoolean(parts[2].trim());
+        boolean pourSol = Boolean.parseBoolean(parts[3].trim());
+        boolean pourPlafond = Boolean.parseBoolean(parts[4].trim());
+        double prixm2 = Double.parseDouble(parts[5].trim());
+        return new uniRevetement(id, nom, pourMur, pourSol, pourPlafond, prixm2);
+    }
 }
