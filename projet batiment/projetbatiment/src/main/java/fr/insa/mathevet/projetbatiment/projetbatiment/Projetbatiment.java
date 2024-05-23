@@ -10,6 +10,8 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
  * 
  * 
  */
+
+/*
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -199,4 +201,4 @@ public class Projetbatiment {
 }
     
 }
-            
+  */          
