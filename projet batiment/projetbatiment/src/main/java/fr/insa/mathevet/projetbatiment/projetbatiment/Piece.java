@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package fr.insa.mathevet.projetbatiment.projetbatiment;
-import static fr.insa.mathevet.projetbatiment.projetbatiment.Mur.fromString;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +38,7 @@ public class Piece {
         this.idPiece = idPiece;
     }
 
+    
     public int getSol() {
         return sol;
     }
@@ -143,24 +143,6 @@ public class Piece {
     //@Override
     //public String toString() {
         //return "Piece{" + "idPiece=" + idPiece + ", sol=" + sol + ", plafond=" + plafond + ", Coindeb=" + Coindeb + ", Coinfin=" + Coinfin + ", hauteur=" + hauteur + ", mur1=" + mur1 + ", mur2=" + mur2 + ", listMurs=" + listMurs + '}';
-    //}
-
-    private String mursToString() {
-        StringBuilder sb = new StringBuilder();
-        for (Mur mur : listMurs) {
-            sb.append(mur.toString()).append("|");
-        }
-        return sb.toString();
-    }
-
-    public static Piece fromString(String str) {
-        String[] parts = str.split(";");
-        int idPiece = Integer.parseInt(parts[0].trim());
-        int sol = Integer.parseInt(parts[1].trim());
-        int plafond = Integer.parseInt(parts[2].trim());
-        double hauteur = Double.parseDouble(parts[3].trim());
-        List<Mur> listMurs = Mur.fromStringList(parts[4].trim());
-        return new Piece(idPiece, sol, plafond, hauteur, listMurs);
-    }    
+    //}   
 
 }
