@@ -11,7 +11,10 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
  *
  * @author emma0
  */
+
 import java.lang.Math;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Mur {
@@ -146,4 +149,30 @@ public double prixmur(double surface){
         return "Mur{" + "idMur=" + idMur + ", debut=" + debut + ", fin=" + fin + ", nbrePortes=" + nbrePortes + ", nbreFenetres=" + nbreFenetres + '}';
     }
 
+// créer un mur à partir d'une String, pour pouvoir récup les infos du document .txt informations_batimenet.txt
+
+    public static Mur fromString(String str) {
+        String[] parts = str.split(",");
+        int idMur = Integer.parseInt(parts[0].trim());
+        Coin debut = Coin.fromString(parts[1].trim() + "," + parts[2].trim() + "," + parts[3].trim());
+        Coin fin = Coin.fromString(parts[4].trim() + "," + parts[5].trim() + "," + parts[6].trim());
+        double hauteur = Double.parseDouble(parts[7].trim());
+        int nbrePortes = Integer.parseInt(parts[8].trim());
+        int nbreFenetres = Integer.parseInt(parts[9].trim());
+        uniRevetement revetement = parts[10].trim().equals("null") ? null : uniRevetement.fromString(parts[10].trim());
+        Mur mur = new Mur(idMur, debut, fin, hauteur, null);
+        mur.setNbrePortes(nbrePortes);
+        mur.setNbreFenetres(nbreFenetres);
+        mur.setRevetement(revetement);
+        return mur;
+    }
+
+    public static List<Mur> fromStringList(String str) {
+        List<Mur> murs = new ArrayList<>();
+        String[] murStrings = str.split("\\|");
+        for (String murStr : murStrings) {
+            murs.add(Mur.fromString(murStr.trim()));
+        }
+        return murs;
+    }
 }
