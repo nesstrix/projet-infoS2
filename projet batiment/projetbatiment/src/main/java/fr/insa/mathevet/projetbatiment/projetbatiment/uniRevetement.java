@@ -17,7 +17,7 @@ public class uniRevetement {
     private boolean pourMur; 
     private double prixm2;
 
-    public uniRevetement (int id, String nom, boolean pourSol, boolean pourPlafond, boolean pourMur, double prixm2) {
+    public uniRevetement (int id, String nom, boolean pourMur, boolean pourSol, boolean pourPlafond, double prixm2) {
         this.id = id;
         this.nom= nom;
         this.pourSol = pourSol;
