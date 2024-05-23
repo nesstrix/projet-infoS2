@@ -11,19 +11,20 @@ package fr.insa.mathevet.projetbatiment.projetbatiment.javafx;
  * 
  */
 
+
+// pour lancer le projet, il faut runfile ce document pour que ça marche, et non Run le projet
 import fr.insa.mathevet.projetbatiment.projetbatiment.Coin;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Mur;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Piece;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Revetement;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Sol;
 import fr.insa.mathevet.projetbatiment.projetbatiment.uniRevetement;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,10 +74,10 @@ public class Projetbatiment extends JFrame {
         startButton.addActionListener(new StartButtonListener());
         panel.add(startButton);
 
-        panel.add(new JLabel ("Selectionnez le niveau à afficher: "));
-        niveauComboBox = new JComboBox <>();
+        panel.add(new JLabel("Selectionnez le niveau à afficher: "));
+        niveauComboBox = new JComboBox<>();
         panel.add(niveauComboBox);
-        
+
         JButton saveButton = new JButton("Sauvegarder Devis");
         saveButton.addActionListener(new SaveButtonListener());
         panel.add(saveButton);
@@ -84,6 +85,10 @@ public class Projetbatiment extends JFrame {
         JButton drawButton = new JButton("Plan 2D");
         drawButton.addActionListener(new DrawButtonListener());
         panel.add(drawButton);
+
+        JButton projButton = new JButton("Continuer le projet précédent");
+        projButton.addActionListener(new ProjButtonListener());
+        panel.add(projButton);
 
         add(panel);
     }
@@ -109,6 +114,13 @@ public class Projetbatiment extends JFrame {
         }
     }
 
+    private class ProjButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            reprendreProj();
+        }
+    }
+
     private class SaveButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -131,7 +143,7 @@ public class Projetbatiment extends JFrame {
             String nbPiecesStr = JOptionPane.showInputDialog(null, "Combien de pièces voulez-vous au niveau " + (k + 1) + "?");
             try {
                 int nbPieces = Integer.parseInt(nbPiecesStr);
-                List<Piece> piecesNiveau = new ArrayList();
+                List<Piece> piecesNiveau = new ArrayList<>();
                 for (int i = 0; i < nbPieces; i++) {
                     JOptionPane.showMessageDialog(null, "Configuration de la pièce numéro " + (i + 1) + " au niveau " + (k + 1));
                     List<Mur> murs = new ArrayList<>();
@@ -144,7 +156,7 @@ public class Projetbatiment extends JFrame {
                     Piece piece = new Piece(i, solId, plafondId, 2.5, murs);
                     piecesNiveau.add(piece);
                 }
-                piecesParNiveau.put(k+1, piecesNiveau);
+                piecesParNiveau.put(k + 1, piecesNiveau);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Veuillez entrer un nombre valide de pièces.", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
@@ -270,11 +282,6 @@ public class Projetbatiment extends JFrame {
             for (String revName : ctparRevetement.keySet()) {
                 writer.write("Revêtement: " + revName + ", Coût Total: " + ctparRevetement.get(revName) + "€, Surface Totale: " + stparRevetement.get(revName) + " m²\n");
             }
-            JOptionPane.showMessageDialog(this, "Devis sauvegardé dans 'devis.txt'.");
-            JOptionPane.showMessageDialog(this, "Informations sur le bâtiment sauvegardées dans 'informations_batiment.txt'.");
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().open(file);
-            }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Erreur lors de la sauvegarde du devis.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
@@ -284,17 +291,15 @@ public class Projetbatiment extends JFrame {
         File file = new File("informations_batiment.txt");
         try (FileWriter writer = new FileWriter(file)) {
             writer.write("Informations sur les pièces du bâtiment :\n\n");
-            for (Map.Entry<Integer, List<Piece>> entry : piecesParNiveau.entrySet() ){
+            for (Map.Entry<Integer, List<Piece>> entry : piecesParNiveau.entrySet()) {
                 int niveau = entry.getKey();
                 List<Piece> piecesNiveau = entry.getValue();
-                writer.write("Niveau"+ niveau + ":\n");
+                writer.write("Niveau " + niveau + ":\n");
                 for (Piece piece : piecesNiveau) {
                     writer.write(piece.toString() + "\n");
+                }
+                writer.write("\n");
             }
-            writer.write("\n");
-            }
-            JOptionPane.showMessageDialog(this, "Informations sur le bâtiment sauvegardées dans 'informations_batiment.txt'.");
-            JOptionPane.showMessageDialog(this, "Informations sur le bâtiment sauvegardées dans 'informations_batiment.txt'.");
             if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().open(file);
             }
@@ -303,24 +308,68 @@ public class Projetbatiment extends JFrame {
         }
     }
 
+    private void reprendreProj() {
+        File file = new File("informations_batiment.txt");
+        if (!file.exists()) {
+            JOptionPane.showMessageDialog(this, "Aucun projet précédent trouvé.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            List<Piece> piecesNiveau = null;
+            int currentNiveau = -1;
+
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Niveau ")) {
+                    if (piecesNiveau != null) {
+                        piecesParNiveau.put(currentNiveau, piecesNiveau);
+                    }
+                    currentNiveau = Integer.parseInt(line.split(" ")[1].replace(":", ""));
+                    piecesNiveau = new ArrayList<>();
+                } else if (!line.trim().isEmpty()) {
+                    Piece piece = Piece.fromString(line);
+                    piecesNiveau.add(piece);
+                }
+            }
+            if (piecesNiveau != null) {
+                piecesParNiveau.put(currentNiveau, piecesNiveau);
+            }
+            updateNiveauComboBox();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Erreur lors de la lecture du projet précédent.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void updateNiveauComboBox() {
+        niveauComboBox.removeAllItems();
+        for (Integer niveau : piecesParNiveau.keySet()) {
+            niveauComboBox.addItem(niveau);
+        }
+    }
+
     private void dessinerPlan2D() {
-        Integer niveauSelectionne = (Integer) niveauComboBox.getSelectedItem(); 
-        if (niveauSelectionne != null){
+        Integer niveauSelectionne = (Integer) niveauComboBox.getSelectedItem();
+        if (niveauSelectionne != null) {
             List<Piece> piecesNiveau = piecesParNiveau.get(niveauSelectionne);
-        
-        JFrame planFrame = new JFrame("Plan 2D du bâtiment - Niveau" + niveauSelectionne);
-        planFrame.setSize(800, 600);
-        planFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        planFrame.add(new Pan2D(piecesNiveau));
-        planFrame.setVisible(true);
+
+            JFrame planFrame = new JFrame("Plan 2D du bâtiment - Niveau " + niveauSelectionne);
+            planFrame.setSize(800, 600);
+            planFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            planFrame.add(new Pan2D(piecesNiveau));
+            planFrame.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Veuillez selectionner un niveau.", "Erreur",JOptionPane.ERROR_MESSAGE );
+            JOptionPane.showMessageDialog(this, "Veuillez sélectionner un niveau.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Projetbatiment app = new Projetbatiment();
+            int response = JOptionPane.showConfirmDialog(null, "Voulez-vous continuer le projet précédent?", "Choisir", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.YES_OPTION) {
+                app.reprendreProj();
+            }
             app.setVisible(true);
         });
     }
