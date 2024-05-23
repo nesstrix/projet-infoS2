@@ -41,12 +41,6 @@ public class Pan2D extends JPanel{
         g.setColor(Color.BLACK);
         for (Piece piece : pieces){  //itérations par pièces    
             
-            
-            //double totalX = 0;
-            //double totalY = 0;
-            //int coinCount = 0;
-            
-         
             for (Mur mur : piece.getListMurs()){
                 Coin debut = mur.getDebut();
                 Coin fin = mur.getFin();
@@ -57,8 +51,7 @@ public class Pan2D extends JPanel{
                 minY = Math.min(minY, Math.min(debut.getY(), fin.getY()));
                 maxX = Math.max(maxX, Math.max(debut.getX(), fin.getX()));
                 maxY = Math.max(maxY, Math.max(debut.getY(), fin.getY()));
-                
-                
+                               
                 //g.drawLine((int) debut.getX()*7, (int) debut.getY()*7, (int) fin.getX()*7, (int) fin.getY()*7);
                 // on fait *7 sinon les pièces sont beaucoup trop petites sur le dessin
                 //totalX += debut.getX() * 10 + fin.getX() * 10;   
@@ -66,11 +59,7 @@ public class Pan2D extends JPanel{
                 //murCount += 2;   //parce qu'un mur contient 2 coins 
                 //pour compter nmb de coins totaux des murs
             }
-            //int centerX = (int) (totalX / 2);   // moy des coordonnées x y pour obtenir position moyenne
-            //int centerY = (int) (totalY / 2);
 
-            // texte au centre de la pièce pour savoir laquelle elle est 
-            //g.drawString("Piece n°" + piece.getIdPiece(), centerX, centerY);
         }
 
         double pieceWidth = (maxX - minX)*20;  // taille des pièces dessinées 
@@ -79,8 +68,8 @@ public class Pan2D extends JPanel{
         int panelWildth = getWidth();  // taille du panneau 
         int panelHeight = getHeight();
         
-        int offsetX = (int) ((panelWildth - pieceWidth)/2 - minX*20);  // déterminer les décalages pour centrer les pièces 
-        int offsetY = (int) ((panelHeight - pieceHeight)/2 - minY*20);
+        int offsetX = (int) ((panelWildth - pieceWidth)/2 - minX*10);  // déterminer les décalages pour centrer les pièces 
+        int offsetY = (int) ((panelHeight - pieceHeight)/2 - minY*10);
         
         g.setColor(Color.BLACK);
         Graphics2D gl = (Graphics2D) g;
@@ -95,10 +84,10 @@ public class Pan2D extends JPanel{
                 Coin debut = mur.getDebut();
                 Coin fin = mur.getFin();
             
-                int debutX = (int) (debut.getX()*20 + offsetX);
-                int debutY = (int) (debut.getY()*20 + offsetY);
-                int finX = (int) (fin.getX()*20 + offsetX);
-                int finY = (int) (fin.getY()*20 + offsetY);
+                int debutX = (int) (debut.getX()*10 + offsetX);
+                int debutY = (int) (debut.getY()*10 + offsetY);
+                int finX = (int) (fin.getX()*10 + offsetX);
+                int finY = (int) (fin.getY()*10 + offsetY);
                 
                 g.drawLine(debutX, debutY, finX,finY);
                 
@@ -107,8 +96,8 @@ public class Pan2D extends JPanel{
                 coinCount += 2;
         }
         
-        int centerX = (int) ((totalX / coinCount)*20 + offsetX);
-        int centerY = (int) ((totalY / coinCount)*20 + offsetY);  
+        int centerX = (int) ((totalX / coinCount)*10 + offsetX);
+        int centerY = (int) ((totalY / coinCount)*10 + offsetY);  
         
         FontMetrics fm = g.getFontMetrics(); // ajustement pour centrer le texte 
         int textWidth = fm.stringWidth("Piece n°" + piece.getIdPiece());
