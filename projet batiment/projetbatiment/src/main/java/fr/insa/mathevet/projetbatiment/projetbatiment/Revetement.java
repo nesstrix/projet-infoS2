@@ -34,7 +34,7 @@ public class Revetement {
                 boolean pourSol = "1".equals(elmt[3].trim());
                 boolean pourPlafond = "1".equals(elmt[4].trim());
                 double prixm2 = Double.parseDouble(elmt[5].trim());
-                revetements.add(new uniRevetement(id, nom, pourSol, pourPlafond, pourMur, prixm2));
+                revetements.add(new uniRevetement(id, nom, pourMur, pourSol, pourPlafond, prixm2));
             }
             } catch (IOException e) {
             e.printStackTrace();
