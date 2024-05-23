@@ -61,4 +61,5 @@ public class Coin {
         return new Coin(idCoin, x, y);
     }
     
+    
 }
