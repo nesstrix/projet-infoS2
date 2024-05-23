@@ -30,9 +30,9 @@ public class Revetement {
                 String[] elmt = ligne.split(";");
                  int id = Integer.parseInt(elmt[0].trim());
                 String nom = elmt[1].trim();
-                boolean pourSol = "1".equals(elmt[2].trim());            // les booleens true = 1 et false = 0 (du catalogue) +   .trim() sert à enlever les espaces dit inutiles
-                boolean pourPlafond = "1".equals(elmt[3].trim());
-                boolean pourMur = "1".equals(elmt[4].trim());
+                boolean pourMur = "1".equals(elmt[2].trim());            // les booleens true = 1 et false = 0 (du catalogue) +   .trim() sert à enlever les espaces dit inutiles
+                boolean pourSol = "1".equals(elmt[3].trim());
+                boolean pourPlafond = "1".equals(elmt[4].trim());
                 double prixm2 = Double.parseDouble(elmt[5].trim());
                 revetements.add(new uniRevetement(id, nom, pourSol, pourPlafond, pourMur, prixm2));
             }
