@@ -11,12 +11,15 @@ package fr.insa.mathevet.projetbatiment.projetbatiment.javafx;
  * 
  */
 
+
+// pour lancer le projet, il faut runfile ce document pour que ça marche, et non Run le projet
 import fr.insa.mathevet.projetbatiment.projetbatiment.Coin;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Mur;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Piece;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Revetement;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Sol;
 import fr.insa.mathevet.projetbatiment.projetbatiment.uniRevetement;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -40,6 +43,8 @@ public class Projetbatiment extends JFrame {
     private JRadioButton rbImmeuble;
     private Map<Integer, List<Piece>> piecesParNiveau = new HashMap<>();
     private JComboBox<Integer> niveauComboBox;
+    private Map<Piece, Integer> pieceToAppartement = new HashMap<>();
+
 
     public Projetbatiment() {
         setTitle("Projet Batiment");
@@ -109,6 +114,13 @@ public class Projetbatiment extends JFrame {
         }
     }
 
+    private class ProjButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            reprendreProj();
+        }
+    }
+
     private class SaveButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -123,30 +135,64 @@ public class Projetbatiment extends JFrame {
             dessinerPlan2D();
         }
     }
-
+    
     private void detpiece(String type) {
         niveauComboBox.removeAllItems();
         for (int k = 0; k < nbNiveaux; k++) {
             niveauComboBox.addItem(k + 1);
-            String nbPiecesStr = JOptionPane.showInputDialog(null, "Combien de pièces voulez-vous au niveau " + (k + 1) + "?");
-            try {
-                int nbPieces = Integer.parseInt(nbPiecesStr);
-                List<Piece> piecesNiveau = new ArrayList();
-                for (int i = 0; i < nbPieces; i++) {
-                    JOptionPane.showMessageDialog(null, "Configuration de la pièce numéro " + (i + 1) + " au niveau " + (k + 1));
-                    List<Mur> murs = new ArrayList<>();
-                    for (int j = 0; j < 4; j++) {
-                        detmur(murs, i, j);
-                    }
-                    int solId = detsol(i, murs);
-                    int plafondId = detplafond(i, murs);
+            if (type.equals("Immeuble")) {
+                String nbAppartementsStr = JOptionPane.showInputDialog(null, "Combien d'appartements voulez-vous au niveau " + (k + 1) + " ?");
+                try {
+                    int nbAppartements = Integer.parseInt(nbAppartementsStr);
+                    List<Piece> piecesNiveau = new ArrayList<>();
+                    for (int a = 0; a < nbAppartements; a++) {
+                        String nbPiecesStr = JOptionPane.showInputDialog(null, "Combien de pièces voulez-vous dans l'appartement " + (a + 1) + " au niveau " + (k + 1) + " ?");
+                        try {
+                            int nbPieces = Integer.parseInt(nbPiecesStr);
+                            //List<Piece> piecesNiveau = new ArrayList<>();
+                            for (int i = 0; i < nbPieces; i++) {
+                                JOptionPane.showMessageDialog(null, "Configuration de la pièce numéro " + (i + 1) + " dans l'appartement " + (a + 1) + " au niveau " + (k + 1));
+                                List<Mur> murs = new ArrayList<>();
+                                for (int j = 0; j < 4; j++) {
+                                    detmur(murs, i, j);
+                                }
+                                int solId = detsol(i, murs);
+                                int plafondId = detplafond(i, murs);
 
-                    Piece piece = new Piece(i, solId, plafondId, 2.5, murs);
-                    piecesNiveau.add(piece);
+                                Piece piece = new Piece(i, solId, plafondId, 2.5, murs);
+                                piecesNiveau.add(piece);
+                                pieceToAppartement.put(piece,a);
+                            }
+                         } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(null, "Veuillez entrer un nombre valide de pièces.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    piecesParNiveau.put(k + 1, piecesNiveau);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Veuillez entrer un nombre valide d'appartements.", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
-                piecesParNiveau.put(k+1, piecesNiveau);
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Veuillez entrer un nombre valide de pièces.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String nbPiecesStr = JOptionPane.showInputDialog(null, "Combien de pièces voulez-vous au niveau " + (k + 1) + " ?");
+                try {
+                    int nbPieces = Integer.parseInt(nbPiecesStr);
+                    List<Piece> piecesNiveau = new ArrayList<>();
+                    for (int i = 0; i < nbPieces; i++) {
+                        JOptionPane.showMessageDialog(null, "Configuration de la pièce numéro " + (i + 1) + " au niveau " + (k + 1));
+                        List<Mur> murs = new ArrayList<>();
+                        for (int j = 0; j < 4; j++) {
+                            detmur(murs, i, j);
+                        }
+                        int solId = detsol(i, murs);
+                        int plafondId = detplafond(i, murs);
+
+                        Piece piece = new Piece(i, solId, plafondId, 2.5, murs);
+                        piecesNiveau.add(piece);
+                        pieceToAppartement.put(piece, 0);
+                    }
+                    piecesParNiveau.put(k + 1, piecesNiveau);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Veuillez entrer un nombre valide de pièces.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }
@@ -258,6 +304,9 @@ public class Projetbatiment extends JFrame {
         return null;
     }
 
+    private void reprendreProj(){
+        
+    }
     private void sauvegardeDev() {
         String type = rbMaison.isSelected() ? "Maison" : rbImmeuble.isSelected() ? "Immeuble" : "Inconnu";
         File file = new File("Devis.txt");
@@ -270,8 +319,6 @@ public class Projetbatiment extends JFrame {
             for (String revName : ctparRevetement.keySet()) {
                 writer.write("Revêtement: " + revName + ", Coût Total: " + ctparRevetement.get(revName) + "€, Surface Totale: " + stparRevetement.get(revName) + " m²\n");
             }
-            JOptionPane.showMessageDialog(this, "Devis sauvegardé dans 'devis.txt'.");
-            JOptionPane.showMessageDialog(this, "Informations sur le bâtiment sauvegardées dans 'informations_batiment.txt'.");
             if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().open(file);
             }
@@ -280,10 +327,10 @@ public class Projetbatiment extends JFrame {
         }
     }
 
-    private void enregistrerinfos() {
+   /* private void enregistrerinfos() {
         File file = new File("informations_batiment.txt");
         try (FileWriter writer = new FileWriter(file)) {
-            writer.write("Informations sur les pièces du bâtiment :\n\n");
+            writer.write("Informations sur les éléments du bâtiment :\n\n");
             for (Map.Entry<Integer, List<Piece>> entry : piecesParNiveau.entrySet() ){
                 int niveau = entry.getKey();
                 List<Piece> piecesNiveau = entry.getValue();
@@ -293,25 +340,66 @@ public class Projetbatiment extends JFrame {
             }
             writer.write("\n");
             }
-            JOptionPane.showMessageDialog(this, "Informations sur le bâtiment sauvegardées dans 'informations_batiment.txt'.");
-            JOptionPane.showMessageDialog(this, "Informations sur le bâtiment sauvegardées dans 'informations_batiment.txt'.");
             if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().open(file);
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Erreur lors de la sauvegarde des informations du bâtiment.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
+    }   */
+    
+    
+ private void enregistrerinfos() {
+    File file = new File("informations_batiment.txt");
+    try (FileWriter writer = new FileWriter(file)) {
+        writer.write("Informations sur les pièces du bâtiment :\n\n");
+        for (Map.Entry<Integer, List<Piece>> entry : piecesParNiveau.entrySet()) {
+            int niveau = entry.getKey();
+            List<Piece> piecesNiveau = entry.getValue();
+            writer.write("Niveau " + niveau + ":\n");
+            Map<Integer, List<Piece>> appartements = new HashMap<>();
+            
+            for (Piece piece : piecesNiveau) {
+                Integer appartementId = pieceToAppartement.get(piece);
+                if (!appartements.containsKey(appartementId)) {
+                    appartements.put(appartementId, new ArrayList<>());
+                }
+                appartements.get(appartementId).add(piece);
+            }
+            
+            for (Map.Entry<Integer, List<Piece>> appartEntry : appartements.entrySet()) {
+                Integer appartementId = appartEntry.getKey();
+                List<Piece> piecesAppartement = appartEntry.getValue();
+                for (Piece piece : piecesAppartement) {
+                    writer.write("Appartement " + appartementId + " - " + piece.toString() + "\n");
+                }
+            }
+            writer.write("\n");
+        }
+        if (Desktop.isDesktopSupported()) {
+            Desktop.getDesktop().open(file);
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Erreur lors de la sauvegarde des informations du bâtiment.", "Erreur", JOptionPane.ERROR_MESSAGE);
     }
+}
 
     private void dessinerPlan2D() {
         Integer niveauSelectionne = (Integer) niveauComboBox.getSelectedItem(); 
         if (niveauSelectionne != null){
             List<Piece> piecesNiveau = piecesParNiveau.get(niveauSelectionne);
-        
+            Map<Piece, Integer> pieceToAppartement = new HashMap<>();
+            int idAppartement = 0; 
+            for (Piece piece : piecesNiveau){
+                pieceToAppartement.put(piece, idAppartement);
+                idAppartement++;
+                
+            }
+            
         JFrame planFrame = new JFrame("Plan 2D du bâtiment - Niveau" + niveauSelectionne);
         planFrame.setSize(800, 600);
         planFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        planFrame.add(new Pan2D(piecesNiveau));
+        planFrame.add(new Pan2D(piecesNiveau, pieceToAppartement));
         planFrame.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Veuillez selectionner un niveau.", "Erreur",JOptionPane.ERROR_MESSAGE );

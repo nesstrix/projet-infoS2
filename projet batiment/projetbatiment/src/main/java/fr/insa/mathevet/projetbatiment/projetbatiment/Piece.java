@@ -20,6 +20,7 @@ public class Piece {
     private double hauteur; 
     private List<Mur> listMurs;
     static int Nextid = 0; 
+   
 
     public Piece(int idPiece, int sol, int plafond, double hauteur, List<Mur> listMurs ) {
         this.idPiece = Nextid ++;
@@ -37,6 +38,7 @@ public class Piece {
         this.idPiece = idPiece;
     }
 
+    
     public int getSol() {
         return sol;
     }
@@ -141,8 +143,6 @@ public class Piece {
     //@Override
     //public String toString() {
         //return "Piece{" + "idPiece=" + idPiece + ", sol=" + sol + ", plafond=" + plafond + ", Coindeb=" + Coindeb + ", Coinfin=" + Coinfin + ", hauteur=" + hauteur + ", mur1=" + mur1 + ", mur2=" + mur2 + ", listMurs=" + listMurs + '}';
-    //}
+    //}   
 
-    
-    
 }

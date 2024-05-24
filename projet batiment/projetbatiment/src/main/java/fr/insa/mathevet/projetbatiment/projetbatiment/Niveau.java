@@ -10,6 +10,7 @@ import java.util.List;
  *
  * @author emma0
  */
+
 public class Niveau {
     
     private int idNiveau;

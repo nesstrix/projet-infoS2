@@ -53,4 +53,13 @@ public class Coin {
     public static int rayon = 4;
    
     
+    public static Coin fromString(String str) {
+        String[] parts = str.split(",");
+        int idCoin = Integer.parseInt(parts[0].trim());
+        double x = Double.parseDouble(parts[1].trim());
+        double y = Double.parseDouble(parts[2].trim());
+        return new Coin(idCoin, x, y);
+    }
+    
+    
 }
