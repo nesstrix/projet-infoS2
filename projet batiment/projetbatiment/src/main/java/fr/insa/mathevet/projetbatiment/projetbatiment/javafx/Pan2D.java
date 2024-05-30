@@ -4,12 +4,6 @@
  */
 package fr.insa.mathevet.projetbatiment.projetbatiment.javafx;
 
-/**
- *
- * @author emma0
- * 
- * 
- */
 import fr.insa.mathevet.projetbatiment.projetbatiment.Coin;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Mur;
 import fr.insa.mathevet.projetbatiment.projetbatiment.Piece;
@@ -76,7 +70,7 @@ public class Pan2D extends JPanel {
         }
     }
 
-    public void drawPieces(Graphics g) {
+    private void drawPieces(Graphics g) {
         double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE;
         double maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE;
 
@@ -171,3 +165,5 @@ public class Pan2D extends JPanel {
         repaint();
     }
 }
+
+
