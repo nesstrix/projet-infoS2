@@ -92,8 +92,8 @@ public class Pan2D extends JPanel {
             }
         }
 
-        double pieceWidth = (maxX - minX) * 20;
-        double pieceHeight = (maxY - minY) * 20;
+        double pieceWidth = (maxX - minX) * 10;
+        double pieceHeight = (maxY - minY) * 10;
 
         int panelWidth = getWidth();
         int panelHeight = getHeight();
