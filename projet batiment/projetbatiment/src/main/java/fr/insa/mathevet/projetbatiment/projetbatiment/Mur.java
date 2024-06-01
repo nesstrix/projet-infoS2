@@ -14,6 +14,14 @@ package fr.insa.mathevet.projetbatiment.projetbatiment;
 
 import java.lang.Math;
 
+import fr.insa.mathevet.projetbatiment.projetbatiment.Coin;
+import fr.insa.mathevet.projetbatiment.projetbatiment.Mur;
+import fr.insa.mathevet.projetbatiment.projetbatiment.Piece;
+import fr.insa.mathevet.projetbatiment.projetbatiment.Revetement;
+import fr.insa.mathevet.projetbatiment.projetbatiment.Sol;
+import fr.insa.mathevet.projetbatiment.projetbatiment.uniRevetement;
+import fr.insa.mathevet.projetbatiment.projetbatiment.Plafond;
+
 
 public class Mur {
     private int idMur;
@@ -23,6 +31,7 @@ public class Mur {
     private int nbreFenetres;
     private double hauteur;
     private uniRevetement revetement ;
+    private int idRevetement;
     Revetement rev ;
   
     //static int NextId = 1 ;
@@ -35,6 +44,7 @@ public class Mur {
         this.nbreFenetres = nbreFenetres;
         this.hauteur = hauteur;
         this.rev = rev;
+        
     }
 
     public int getIdMur() {
@@ -86,6 +96,15 @@ public class Mur {
   
     public double getHauteur() {
         return hauteur;
+    }
+    
+    
+     public int getIdRevetement() {
+        return idRevetement;
+    }
+
+    public void setIdRevetement(int idRevetement) {
+        this.idRevetement = idRevetement;
     }
    
     public double Longueur (){
